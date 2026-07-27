@@ -123,9 +123,21 @@ function ProjectCard({ project, index, isLast, scale, opacity }: any) {
           <h3 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight drop-shadow-2xl">
             {project.title}
           </h3>
-          <p className="text-gray-300 text-base md:text-lg leading-relaxed mb-10 drop-shadow-lg glass-card p-6 rounded-2xl border-none pointer-events-auto">
-            {project.description}
-          </p>
+          <div className="glass-card p-6 rounded-2xl border-none pointer-events-auto mb-10 max-h-[250px] overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-white/5 [&::-webkit-scrollbar-thumb]:bg-cyan-500/50 [&::-webkit-scrollbar-thumb]:rounded-full">
+            <p className="text-gray-200 text-base md:text-lg leading-relaxed drop-shadow-lg">
+              {project.description}
+            </p>
+            {project.features && (
+              <ul className="mt-4 space-y-2 border-t border-white/10 pt-4">
+                {project.features.map((feature: string, i: number) => (
+                  <li key={i} className="flex items-start gap-3 text-sm text-gray-400 leading-relaxed">
+                    <span className="text-cyan-400 mt-0.5 text-xs">▹</span>
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
           <div className="flex flex-wrap items-center gap-4 pointer-events-auto">
             <a
               href={project.liveUrl}
