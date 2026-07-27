@@ -33,6 +33,15 @@ export const portfolioData = {
       githubUrl: "https://github.com/lehai170504/complipilot-backend",
       liveUrl: "https://complipilot-frontend.vercel.app",
       image: "/images/complipilot-official.png",
+    },
+    {
+      id: "wealthtrack",
+      title: "WealthTrack",
+      description: "A comprehensive personal and group finance management platform featuring RBAC, real-time spending statistics, savings goals, and budget alerts.",
+      tags: ["Spring Boot", "Next.js", "Redis", "Docker", "OAuth"],
+      githubUrl: "https://github.com/lehai170504/Finance-Backend",
+      liveUrl: "https://finance-website-pi.vercel.app",
+      image: "/images/wealthtrack-official.png",
     }
   ],
   experience: [
@@ -49,6 +58,13 @@ export const portfolioData = {
       organization: "Freelance",
       date: "2022 - Present",
       description: "Built and deployed multiple web applications using Spring Boot and Next.js, including real-time auction platforms.",
+    },
+    {
+      id: 3,
+      title: "Full-stack Software Engineer",
+      organization: "WealthTrack",
+      date: "Jan 2026 - Apr 2026",
+      description: "Architected a finance management platform with Spring Boot and Next.js. Optimized performance by 40% using TanStack Query caching and integrated Redis, Docker, and Google OAuth.",
     }
   ],
   socials: {

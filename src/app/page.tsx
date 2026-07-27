@@ -15,9 +15,9 @@ export default function Home() {
         <div className="fixed inset-0 z-[-1] pointer-events-none overflow-hidden bg-background">
           <div className="absolute inset-0 bg-grid-pattern opacity-40 mix-blend-overlay" />
           {/* Animated Aurora Orbs */}
-          <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-cyan-900/30 blur-[120px] animate-[pulse_8s_ease-in-out_infinite_alternate]" />
-          <div className="absolute top-[20%] -right-[10%] w-[40%] h-[60%] rounded-full bg-blue-900/20 blur-[150px] animate-[pulse_12s_ease-in-out_infinite_alternate_reverse]" />
-          <div className="absolute -bottom-[10%] left-[20%] w-[60%] h-[40%] rounded-full bg-purple-900/20 blur-[120px] animate-[pulse_10s_ease-in-out_infinite_alternate]" />
+          <div className="absolute -top-[20%] -left-[10%] w-[70%] h-[70%] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-cyan-900/30 via-cyan-900/5 to-transparent animate-[pulse_8s_ease-in-out_infinite_alternate]" />
+          <div className="absolute top-[20%] -right-[10%] w-[60%] h-[80%] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/20 via-blue-900/5 to-transparent animate-[pulse_12s_ease-in-out_infinite_alternate_reverse]" />
+          <div className="absolute -bottom-[10%] left-[20%] w-[80%] h-[60%] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900/20 via-purple-900/5 to-transparent animate-[pulse_10s_ease-in-out_infinite_alternate]" />
         </div>
         <HeroSection />
         <ScrollReveal>

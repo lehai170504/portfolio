@@ -8,7 +8,7 @@ export function AboutSection() {
   return (
     <section id="about" className="py-32 scroll-mt-32 bg-black/40 border-y border-white/5 relative overflow-hidden">
       {/* Subtle ambient glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-full bg-primary/5 rounded-[100%] blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent pointer-events-none" />
 
       <div className="container mx-auto px-6 md:px-8 relative z-10">
         <motion.div
@@ -78,7 +78,7 @@ export function AboutSection() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="glass-card rounded-3xl p-6 relative overflow-hidden group flex flex-col"
           >
-            <div className="absolute top-0 right-0 p-32 bg-cyan-500/5 rounded-full blur-[50px] group-hover:bg-cyan-500/10 transition-colors pointer-events-none" />
+            <div className="absolute top-0 right-0 w-[200px] h-[200px] bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-cyan-500/10 via-transparent to-transparent transition-colors pointer-events-none" />
             <h3 className="text-lg font-bold mb-6 flex items-center gap-2 text-white">
               <Code2 className="text-cyan-400 w-5 h-5" />
               Core Stack

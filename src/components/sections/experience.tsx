@@ -21,9 +21,9 @@ export function ExperienceSection() {
       {/* Subtle ambient tech grid background */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
 
-      {/* Glowing atmospheric orbs */}
-      <div className="absolute top-1/4 left-0 w-96 h-96 bg-cyan-900/20 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-purple-900/20 rounded-full blur-[120px] pointer-events-none" />
+      {/* Background ambient light */}
+      <div className="absolute top-1/4 left-0 w-96 h-96 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-cyan-900/10 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-900/10 via-transparent to-transparent pointer-events-none" />
 
       <div className="container mx-auto px-4 md:px-8 relative z-10">
         <motion.div

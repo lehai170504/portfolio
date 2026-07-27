@@ -33,8 +33,8 @@ export function ContactSection() {
       {/* High-tech Blueprint Grid Background */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(34,211,238,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(34,211,238,0.03)_1px,transparent_1px)] bg-[size:3rem_3rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_100%,#000_40%,transparent_100%)] pointer-events-none" />
 
-      {/* Massive Ambient Core Glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-cyan-600/10 blur-[150px] pointer-events-none" />
+      {/* Ambient background glow */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-cyan-600/10 via-transparent to-transparent pointer-events-none" />
 
       <div className="container mx-auto px-4 md:px-8 max-w-7xl relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">

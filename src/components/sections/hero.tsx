@@ -100,7 +100,7 @@ export function HeroSection() {
           </svg>
 
           {/* Glow effect behind the card */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] max-w-[400px] bg-blue-500/20 rounded-full blur-[100px] pointer-events-none z-0" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-[500px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-500/20 via-blue-500/5 to-transparent pointer-events-none z-0" />
 
           {/* Floating Photo Container */}
           <motion.div

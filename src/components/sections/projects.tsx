@@ -22,7 +22,7 @@ export function ProjectsSection() {
   return (
     <section id="projects" className="py-32 scroll-mt-32 relative overflow-clip bg-background">
       {/* Dynamic Background Glow */}
-      <div className="absolute top-1/4 left-0 w-full h-[50%] bg-gradient-to-r from-blue-900/10 via-cyan-900/10 to-purple-900/10 blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/4 left-0 w-full h-[50%] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/10 via-cyan-900/5 to-transparent pointer-events-none" />
 
       <div className="container mx-auto px-4 md:px-8 relative z-10">
         <motion.div
