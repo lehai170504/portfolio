@@ -20,15 +20,6 @@ export const portfolioData = {
       id: "thriftly",
       title: "Thriftly",
       description: "A real-time auction e-commerce platform allowing users to bid on secondhand items with live updates.",
-      features: [
-        "Integrated Agora WebRTC and STOMP WebSockets to build an ultra-low latency Live Auction feature.",
-        "Optimized homepage rendering using Intersection Observer to dynamically load video streams.",
-        "Resolved race conditions in concurrent bidding using Pessimistic Locking at the DB level.",
-        "Built an Escrow Wallet system ensuring 100% secure transactions with @Transactional rollbacks.",
-        "Implemented Clean Architecture by separating Domain, Command, and Query layers.",
-        "Secured the system against DDoS and brute-force attacks using Bucket4j Rate Limiting.",
-        "Configured highly secure authentication utilizing JWT with Refresh Tokens and strict XSS/CSRF defenses."
-      ],
       tags: ["Spring Boot", "Next.js", "WebSockets", "PostgreSQL", "Escrow"],
       githubUrl: "https://github.com/lehai170504/thriftly",
       liveUrl: "https://thrift-swap.vercel.app",
