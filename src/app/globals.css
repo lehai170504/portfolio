@@ -152,7 +152,7 @@
 
 @layer components {
   .glass-card {
-    @apply bg-white/[0.02] backdrop-blur-md border border-white/5 hover:border-cyan-500/30 hover:bg-white/[0.04] transition-all duration-500 shadow-xl;
+    @apply bg-white/[0.02] backdrop-blur-sm border border-white/5 hover:border-cyan-500/30 hover:bg-white/[0.04] transition-all duration-500 shadow-xl;
   }
 
   .section-badge {

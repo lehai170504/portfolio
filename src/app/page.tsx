@@ -13,7 +13,7 @@ export default function Home() {
       <main className="flex-1 flex flex-col relative">
         {/* Enhanced Dynamic Ambient Background */}
         <div className="fixed inset-0 z-[-1] pointer-events-none overflow-hidden bg-background">
-          <div className="absolute inset-0 bg-grid-pattern opacity-40 mix-blend-overlay" />
+          <div className="absolute inset-0 bg-grid-pattern opacity-20" />
           {/* Animated Aurora Orbs */}
           <div className="absolute -top-[20%] -left-[10%] w-[70%] h-[70%] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-cyan-900/30 via-cyan-900/5 to-transparent animate-[pulse_8s_ease-in-out_infinite_alternate]" />
           <div className="absolute top-[20%] -right-[10%] w-[60%] h-[80%] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/20 via-blue-900/5 to-transparent animate-[pulse_12s_ease-in-out_infinite_alternate_reverse]" />
@@ -23,15 +23,15 @@ export default function Home() {
         <ScrollReveal>
           <AboutSection />
         </ScrollReveal>
-        
+
         <ScrollReveal>
           <ProjectsSection />
         </ScrollReveal>
-        
+
         <ScrollReveal>
           <ExperienceSection />
         </ScrollReveal>
-        
+
         <ScrollReveal>
           <ContactSection />
         </ScrollReveal>

@@ -95,7 +95,7 @@ function ProjectCard({ project, index, isLast, scale, opacity }: any) {
         className="w-full h-[600px] md:h-[700px] group relative rounded-[2.5rem] shadow-[0_-20px_60px_rgba(0,0,0,0.6)] transform-gpu"
       >
         {/* 1. The Background Layer */}
-        <div className="absolute inset-0 w-full h-full rounded-[2.5rem] overflow-hidden glass-card pointer-events-none">
+        <div className="absolute inset-0 w-full h-full rounded-[2.5rem] overflow-hidden bg-white/[0.02] border border-white/5 pointer-events-none">
           <Image
             src={project.image || "/images/placeholder.png"}
             alt={project.title}
@@ -134,7 +134,7 @@ function ProjectCard({ project, index, isLast, scale, opacity }: any) {
               className="relative inline-flex h-14 overflow-hidden rounded-full p-[2px] focus:outline-none group/btn cursor-none"
             >
               <span className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#22d3ee_0%,#3b82f6_50%,#22d3ee_100%)] opacity-70 group-hover/btn:opacity-100 transition-opacity" />
-              <span className="inline-flex h-full w-full items-center justify-center rounded-full bg-background px-8 text-sm font-medium text-white backdrop-blur-3xl gap-2 transition-colors group-hover/btn:bg-secondary">
+              <span className="inline-flex h-full w-full items-center justify-center rounded-full bg-background px-8 text-sm font-medium text-white backdrop-blur-sm gap-2 transition-colors group-hover/btn:bg-secondary">
                 <ExternalLink className="w-5 h-5 text-cyan-400" />
                 <span className="font-semibold text-cyan-50">Live Demo</span>
               </span>
@@ -146,7 +146,7 @@ function ProjectCard({ project, index, isLast, scale, opacity }: any) {
               className={buttonVariants({
                 variant: "ghost",
                 size: "lg",
-                className: "rounded-full px-8 h-14 flex items-center justify-center border border-white/10 hover:bg-white/10 text-white bg-white/5 backdrop-blur-md transition-all gap-2 cursor-none",
+                className: "rounded-full px-8 h-14 flex items-center justify-center border border-white/10 hover:bg-white/10 text-white bg-white/5 backdrop-blur-sm transition-all gap-2 cursor-none",
               })}
             >
               <FaGithub className="w-5 h-5" />
