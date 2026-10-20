@@ -1,0 +1,69 @@
+# ==========================================
+# 1. DEPENDENCIES (Thư mục thư viện - Cực kỳ nặng)
+# ==========================================
+/node_modules
+/.pnpm-store
+/yarn.lock
+/package-lock.json
+/pnpm-lock.yaml
+
+# ==========================================
+# 2. NEXT.JS BUILD & CACHE (File sinh ra khi run/build)
+# ==========================================
+/.next/
+/out/
+/build
+/dist
+
+# ==========================================
+# 3. ENVIRONMENT VARIABLES (Mật khẩu, API Keys - Bảo mật)
+# ==========================================
+.env
+.env*.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ==========================================
+# 4. IDE & EDITOR FILES (Cấu hình riêng của VSCode/Cursor)
+# ==========================================
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ==========================================
+# 5. OS & SYSTEM FILES (File rác của hệ điều hành)
+# ==========================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ==========================================
+# 6. LOGS & DIAGNOSTICS (File log hệ thống)
+# ==========================================
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-debug.log*
+
+# ==========================================
+# 7. LARGE ASSETS / DRAFT FILES (Bỏ qua file 3D/ảnh nháp nặng)
+# ==========================================
+# Chặn các file 3D tạm chưa tối ưu nếu nằm ngoài public
+*.blend
+*.fbx
+*.obj
+# Nếu có file ảnh 2D/3D nháp dung lượng lớn trong thư mục gốc
+/drafts/
+*.tmp
