@@ -3,11 +3,11 @@
 import { motion, useReducedMotion } from "framer-motion";
 
 const routes = [
-  { d: "M210 105 H292", from: [210, 105], to: [292, 105], duration: 1.8 },
-  { d: "M508 105 H590", from: [508, 105], to: [590, 105], duration: 2.2 },
-  { d: "M400 145 V198", from: [400, 145], to: [400, 198], duration: 2 },
-  { d: "M508 235 H550 Q570 235 570 215 V105 H590", from: [508, 235], to: [590, 105], duration: 2.8 },
-  { d: "M292 235 H244 Q224 235 224 215 V105 H210", from: [292, 235], to: [210, 105], duration: 3 },
+  { d: "M210 105 H292", from: [210, 105], to: [292, 105], duration: 3.2 },
+  { d: "M508 105 H590", from: [508, 105], to: [590, 105], duration: 3.8 },
+  { d: "M400 145 V198", from: [400, 145], to: [400, 198], duration: 3.5 },
+  { d: "M508 235 H550 Q570 235 570 215 V105 H590", from: [508, 235], to: [590, 105], duration: 4.8 },
+  { d: "M292 235 H244 Q224 235 224 215 V105 H210", from: [292, 235], to: [210, 105], duration: 5 },
 ];
 
 const nodes = [

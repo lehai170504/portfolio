@@ -23,6 +23,8 @@ interface Project {
   subtitle: string;
   badge?: { text: string; color: "rose" | "blue" | "emerald" };
   description: string;
+  challenge: string;
+  engineeringDecision: string;
   image?: {
     src: string;
     alt: string;
@@ -91,6 +93,10 @@ const PROJECTS: Project[] = [
     badge: { text: "Live Auction", color: "rose" },
     description:
       "A live auction and e-commerce product built around consistent bidding, instant updates, and live video.",
+    challenge:
+      "Keep concurrent bids consistent while every participant sees auction updates in real time.",
+    engineeringDecision:
+      "Use pessimistic locking for bid writes, then broadcast accepted updates through WebSockets; WebRTC supports live streaming.",
     image: {
       src: "/thriftly-project.png",
       alt: "Thriftly vintage clothing auction landing page",
@@ -119,6 +125,10 @@ High-throughput live bidding and auction platform engineered with pessimistic lo
     subtitle: "AI Compliance SaaS Platform",
     description:
       "A compliance management SaaS focused on organization-aware access and assisted audit workflows.",
+    challenge:
+      "Keep customer workspaces isolated while supporting role-based access and audit work.",
+    engineeringDecision:
+      "Structure the product around multi-tenant boundaries, RBAC, and assisted audit workflows.",
     image: {
       src: "/complipilot-project.png",
       alt: "CompliPilot compliance workspace landing page",
@@ -145,6 +155,10 @@ Enterprise automated compliance management system with multi-tenant architecture
     subtitle: "Financial Management & Portfolio Analytics",
     description:
       "A personal finance backend for budgeting, wealth tracking, and portfolio analytics.",
+    challenge:
+      "Keep budgeting and portfolio analytics organized as the finance domain grows.",
+    engineeringDecision:
+      "Separate the backend with Clean Architecture and use Redis caching for analytics and valuation reads.",
     flow: ["API request", "Clean Architecture", "Redis cache", "Analytics"],
     icon: LineChart,
     accentColor: "emerald",
@@ -185,11 +199,11 @@ function ProjectCard({
       initial={revealOnScroll
         ? prefersReducedMotion
           ? { opacity: 0 }
-          : { opacity: 0, y: 20 }
+          : { opacity: 0, y: 14 }
         : false}
       whileInView={revealOnScroll ? { opacity: 1, y: 0, scale: 1 } : undefined}
-      viewport={revealOnScroll ? { once: true, amount: 0.12 } : undefined}
-      transition={{ duration: prefersReducedMotion ? 0.01 : 0.8, ease: [0.22, 1, 0.36, 1] }}
+      viewport={revealOnScroll ? { once: true, amount: 0.08 } : undefined}
+      transition={{ duration: prefersReducedMotion ? 0.01 : 0.65, ease: [0.22, 1, 0.36, 1] }}
       className={`relative flex min-w-0 flex-col overflow-hidden border ${a.border} bg-gradient-to-br ${a.from} ${a.via} to-[#fffdf7] p-4 shadow-[0_8px_30px_rgba(42,34,22,0.04)] transition-colors duration-300 sm:p-6 lg:p-8 ${a.hoverBorder} ${className}`}
     >
       <div className="relative flex min-h-0 min-w-0 flex-1 flex-col gap-5 sm:gap-6">
@@ -267,11 +281,28 @@ function ProjectCard({
           )}
 
           <div className={`min-w-0 space-y-4 sm:space-y-5 ${isFeatured ? "lg:order-first" : ""}`}>
-            <p
-              className="max-w-3xl text-sm text-[#5f5a52] leading-relaxed font-normal"
-            >
+            <p className="max-w-3xl text-sm font-normal leading-relaxed text-[#5f5a52]">
               {project.description}
             </p>
+
+            <div className={`grid gap-3 sm:grid-cols-2 ${isFeatured ? "lg:grid-cols-1" : ""}`}>
+              <div className="border-l-2 border-[#d7d1c5] pl-3">
+                <p className="mb-1 font-mono text-[9px] uppercase tracking-[0.16em] text-[#8a8378]">
+                  The challenge
+                </p>
+                <p className="text-xs leading-relaxed text-[#4d4942] sm:text-sm">
+                  {project.challenge}
+                </p>
+              </div>
+              <div className="border-l-2 border-[#f06432] pl-3">
+                <p className="mb-1 font-mono text-[9px] uppercase tracking-[0.16em] text-[#f06432]">
+                  Engineering decision
+                </p>
+                <p className="text-xs leading-relaxed text-[#4d4942] sm:text-sm">
+                  {project.engineeringDecision}
+                </p>
+              </div>
+            </div>
 
             <div className={`border-y border-[#e5dfd3] py-4 sm:py-5 ${
               isArchitectureProject ? "bg-[#ebe7dd] px-3 sm:px-4" : ""
@@ -313,6 +344,19 @@ function ProjectCard({
         </div>
         {isFeatured && (
           <div className="border-t border-[#d7d1c5] pt-5">
+            <div className="mb-3 flex flex-wrap items-end justify-between gap-2">
+              <div>
+                <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-[#f06432]">
+                  Engineering field note / 01
+                </p>
+                <h4 className="mt-1 font-display text-lg font-semibold tracking-tight text-[#1b1b18] sm:text-xl">
+                  What happens behind a live bid?
+                </h4>
+              </div>
+              <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[#8a8378]">
+                Request → consistent write → live update
+              </span>
+            </div>
             <BackendArchitecture />
           </div>
         )}
@@ -331,7 +375,7 @@ export default function Projects() {
           <div>
             <div className="mb-3 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[#f06432]">
               <Layers className="h-3.5 w-3.5" />
-              <span>Selected work / 2025—26</span>
+              <span>Engineering field notes / selected work</span>
             </div>
             <h2 className="font-display text-3xl font-bold tracking-[-0.06em] text-[#1b1b18] sm:text-5xl">
               Things I&apos;ve built<span className="text-[#f06432]">.</span>

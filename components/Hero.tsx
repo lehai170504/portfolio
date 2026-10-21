@@ -66,9 +66,13 @@ export default function Hero() {
               </motion.h1>
               <motion.p
                 variants={entrance}
-                className="font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-[#716d65] sm:text-xs sm:tracking-[0.18em]"
+                className="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-[#716d65] sm:text-xs sm:tracking-[0.18em]"
               >
-                Java backend <span className="text-[#f06432]">/</span> real-time products
+                <span>Java backend</span>
+                <span className="text-[#f06432]">/</span>
+                <span>API design</span>
+                <span className="text-[#f06432]">/</span>
+                <span>real-time systems</span>
               </motion.p>
             </motion.div>
 
