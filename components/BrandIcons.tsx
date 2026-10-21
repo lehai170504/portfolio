@@ -1,84 +1,92 @@
+import {
+  siDocker,
+  siMongodb,
+  siNextdotjs,
+  siPostgresql,
+  siRedis,
+  siSpringboot,
+  siTailwindcss,
+  siTypescript,
+  siWebrtc,
+  type SimpleIcon,
+} from "simple-icons";
+
 interface IconProps {
   className?: string;
-  size?: number;
+}
+
+function BrandIcon({
+  icon,
+  className = "h-5 w-5",
+}: IconProps & { icon: SimpleIcon }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d={icon.path} />
+    </svg>
+  );
 }
 
 export function JavaIcon({ className = "h-5 w-5" }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+      focusable="false"
+    >
       <path d="M8.85 16.34c-.87.48-1.55.93-1.55 1.48 0 1.05 2.5 1.54 4.7 1.54 2.19 0 4.7-.49 4.7-1.54 0-.55-.68-1-1.55-1.48-.96.65-2.22 1-3.15 1s-2.19-.35-3.15-1zm6.98 1.94c-1.12.39-2.45.58-3.83.58s-2.71-.19-3.83-.58c-.67.43-1.07.84-1.07 1.29 0 1.13 2.53 1.7 4.9 1.7s4.9-.57 4.9-1.7c0-.45-.4-.86-1.07-1.29zM12 21.87c-3.13 0-5.74-.8-5.74-1.84 0-.44.49-.87 1.34-1.21-.8-1.06-.9-2.02-.9-2.67 0-.74.37-1.39 1.14-1.95.82-.6 2.05-1.02 3.51-1.21-.49-.78-.75-1.63-.75-2.51 0-1.85 1.25-3.23 2.54-4.66.61-.68 1.23-1.37 1.7-2.19.14-.25.32-.4.49-.4.15 0 .28.11.36.31.3 1.04.14 2.22-.44 3.32-.49.95-1.2 1.83-1.69 2.76-.71 1.34-.69 2.58.07 3.55.22.28.49.52.81.72 1.27.18 2.37.58 3.12 1.14.78.56 1.16 1.21 1.16 1.95 0 .65-.1 1.61-.9 2.67.85.34 1.34.77 1.34 1.21 0 1.04-2.61 1.84-6.06 1.84z" />
     </svg>
   );
 }
 
-export function SpringIcon({ className = "h-5 w-5" }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-      <path d="M21.57 9.87c-.37-.8-1.05-1.46-1.9-1.85-.71-.33-1.67-.47-2.65-.39-1.14.09-2.22.45-3.13.97-1.4.8-2.53 1.95-3.41 3.25-.97 1.44-1.65 3.05-2.07 4.74-.18.72-.29 1.45-.34 2.19-.02.34-.02.68.01 1.01.07.69.29 1.35.68 1.92.51.75 1.27 1.32 2.16 1.63.79.28 1.66.36 2.53.25.99-.13 1.93-.5 2.74-1.05 1.4-.95 2.47-2.25 3.23-3.71.69-1.32 1.09-2.77 1.24-4.26.08-.75.06-1.52-.06-2.28-.12-.76-.46-1.54-1.03-2.22zM12.9 19.34c-.81.65-1.85.9-2.85.67-.91-.21-1.68-.8-2.12-1.62-.48-.9-.59-1.99-.37-2.99.31-1.4 1.04-2.69 2.05-3.69 1.12-1.11 2.55-1.86 4.08-2.15 1.04-.2 2.13-.07 3.09.43.34.18.66.42.92.71.18.2.32.44.42.69-.11 1.25-.52 2.47-1.18 3.55-.78 1.28-1.85 2.37-3.11 3.16-.3.19-.62.33-.93.25z" />
-    </svg>
-  );
+export function SpringIcon(props: IconProps) {
+  return <BrandIcon icon={siSpringboot} {...props} />;
 }
 
-export function NextjsIcon({ className = "h-5 w-5" }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-      <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3.87 14.86l-5.32-6.87v6.87H8.84V7.54h1.71l5.32 6.87V7.54h1.71v9.32h-1.71z" />
-    </svg>
-  );
+export function NextjsIcon(props: IconProps) {
+  return <BrandIcon icon={siNextdotjs} {...props} />;
 }
 
-export function PostgresIcon({ className = "h-5 w-5" }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.2 16.4c-1.7 0-3.1-.7-4-1.9l1.4-1.1c.6.8 1.5 1.3 2.6 1.3 1.5 0 2.4-.8 2.4-2 0-2.8-5.8-1.5-5.8-5.7 0-2 1.6-3.4 3.9-3.4 1.4 0 2.6.5 3.4 1.4l-1.3 1.2c-.6-.6-1.3-.9-2.1-.9-1.3 0-2.1.7-2.1 1.7 0 2.6 5.8 1.4 5.8 5.6 0 2.2-1.7 3.8-4.2 3.8z" />
-    </svg>
-  );
+export function PostgresIcon(props: IconProps) {
+  return <BrandIcon icon={siPostgresql} {...props} />;
 }
 
-export function RedisIcon({ className = "h-5 w-5" }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-      <path d="M20.65 10.3l-8.08-4.66a1.13 1.13 0 00-1.14 0L3.35 10.3a1.14 1.14 0 00-.57.99v5.42c0 .41.22.79.57.99l8.08 4.66a1.13 1.13 0 001.14 0l8.08-4.66a1.14 1.14 0 00.57-.99v-5.42a1.14 1.14 0 00-.57-.99zm-8.65-3.08l6.45 3.72-2.73 1.58-6.45-3.72 2.73-1.58zm-7.07 4.71l6.5 3.75v3.16l-6.5-3.75v-3.16zm8.21 6.91v-3.16l6.5-3.75v3.16l-6.5 3.75z" />
-    </svg>
-  );
+export function RedisIcon(props: IconProps) {
+  return <BrandIcon icon={siRedis} {...props} />;
 }
 
-export function MongoIcon({ className = "h-5 w-5" }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-      <path d="M12.2 2c-.1 0-.2.1-.2.2-.6 2.3-2.1 4.7-3.2 6.9-1.3 2.7-1.9 5.5-.8 8.4.9 2.4 2.9 4.1 4.2 4.5.1 0 .2 0 .2-.1.4-1.2.7-2.5.7-3.8 0-4.3-1.4-7.5-1.4-10.9 0-1.7.2-3.4.5-5.2z" />
-      <path d="M12.4 2.2c.4 1.8.6 3.6.6 5.4 0 3.3-1.3 6.4-1.3 10.5 0 1.5.3 2.9.8 4.2.1.2.2.2.3.1 1.6-.7 3.5-2.7 4-5.3.6-3.1-.3-6-1.8-8.6-1.1-2.1-2.2-4.3-2.6-6.3z" />
-    </svg>
-  );
+export function MongoIcon(props: IconProps) {
+  return <BrandIcon icon={siMongodb} {...props} />;
 }
 
-export function DockerIcon({ className = "h-5 w-5" }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-      <path d="M13.98 11.08h-2.12v2.12h2.12v-2.12zm-2.63 0H9.23v2.12h2.12v-2.12zm-2.63 0H6.6v2.12h2.12v-2.12zm7.88 0h-2.12v2.12h2.12v-2.12zm-5.25-2.63H9.23v2.12h2.12V8.45zm2.62 0h-2.12v2.12h2.12V8.45zm2.63 0h-2.12v2.12h2.12V8.45zm2.62 0h-2.12v2.12h2.12V8.45zm3.75 3.75c-.32-.23-.88-.34-1.6-.14-.23-.8-1-1.38-1.58-1.58l-.66-.22-.38.56c-.5.73-.59 1.76-.23 2.65-.67.38-1.52.42-2.18.42H2.33c-.2 1.48.24 3.02 1.25 4.17 1.43 1.63 3.64 2.45 6.43 2.45 5.56 0 9.77-3.03 10.6-8.22.46.06.92.05 1.34-.09.3-.1.68-.31.85-.56l-.28-.59c-.42.2-1.04.2-1.54.15z" />
-    </svg>
-  );
+export function DockerIcon(props: IconProps) {
+  return <BrandIcon icon={siDocker} {...props} />;
 }
 
-export function TypescriptIcon({ className = "h-5 w-5" }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" className={className}>
-      <rect width="24" height="24" rx="3.5" fill="#3178c6" />
-      <path
-        fill="#ffffff"
-        d="M1.75 11.23h7.64v2.34H6.87v9.33H4.27v-9.33H1.75z"
-      />
-      <path
-        fill="#ffffff"
-        d="M18.488 9.75c.612 0 1.154.037 1.627.111.473.074.908.187 1.306.34v2.458c-.21-.13-.424-.25-.643-.361a5.093 5.093 0 0 0-.717-.26 5.453 5.453 0 0 0-1.426-.2c-.3 0-.573.027-.819.08a1.69 1.69 0 0 0-.642.256c-.172.12-.303.28-.393.479-.09.198-.135.438-.135.719 0 .285.045.523.135.714.09.191.22.35.39.479.17.129.38.237.63.324.25.087.533.167.85.24 1.053.242 1.874.582 2.464 1.02.59.438.885 1.107.885 2.008 0 .59-.115 1.11-.345 1.56-.23.45-.558.825-.984 1.125-.426.3-.945.525-1.557.675-.612.15-1.312.225-2.1.225-.79 0-1.53-.082-2.22-.247a8.55 8.55 0 0 1-1.785-.683v-2.61c.67.4 1.35.69 2.04.87.69.18 1.34.27 1.95.27.35 0 .66-.03.93-.09.27-.06.49-.15.66-.27.17-.12.3-.28.39-.48.09-.2.135-.44.135-.72 0-.29-.05-.53-.15-.72-.1-.19-.24-.35-.42-.48-.18-.13-.4-.24-.66-.33-.26-.09-.56-.17-.9-.24-1.05-.24-1.87-.58-2.46-1.02-.59-.44-.885-1.11-.885-2.01 0-.58.12-1.1.36-1.56.24-.46.58-.84 1.02-1.14.44-.3.97-.525 1.59-.675.62-.15 1.31-.225 2.07-.225z"
-      />
-    </svg>
-  );
+export function TypescriptIcon(props: IconProps) {
+  return <BrandIcon icon={siTypescript} {...props} />;
 }
 
 export function WebSocketIcon({ className = "h-5 w-5" }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true" focusable="false">
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+      focusable="false"
+    >
       <path d="M4 12v-3a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v3" />
       <path d="M20 12v3a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-3" />
       <path d="M7.5 12h9" />
@@ -88,22 +96,10 @@ export function WebSocketIcon({ className = "h-5 w-5" }: IconProps) {
   );
 }
 
-export function WebRTCIcon({ className = "h-5 w-5" }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true" focusable="false">
-      <circle cx="12" cy="12" r="2" />
-      <path d="M16 8a5.7 5.7 0 0 1 0 8" />
-      <path d="M8 16a5.7 5.7 0 0 1 0-8" />
-      <path d="M19 5a10 10 0 0 1 0 14" />
-      <path d="M5 19A10 10 0 0 1 5 5" />
-    </svg>
-  );
+export function WebRTCIcon(props: IconProps) {
+  return <BrandIcon icon={siWebrtc} {...props} />;
 }
 
-export function TailwindIcon({ className = "h-5 w-5" }: IconProps) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-      <path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.975 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.336 13.382 8.975 12 6.001 12z" />
-    </svg>
-  );
+export function TailwindIcon(props: IconProps) {
+  return <BrandIcon icon={siTailwindcss} {...props} />;
 }

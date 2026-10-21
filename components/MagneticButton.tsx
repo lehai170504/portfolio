@@ -38,7 +38,7 @@ export default function MagneticButton({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       animate={{ x: position.x, y: position.y }}
-      transition={{ type: "spring", stiffness: 260, damping: 20, mass: 0.5 }}
+      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
       className={className}
       onClick={onClick}
     >

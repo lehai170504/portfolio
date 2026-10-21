@@ -18,8 +18,8 @@ import {
 const row1 = [
   { name: "Java", icon: JavaIcon, color: "text-[#f89820]" },
   { name: "Spring Boot", icon: SpringIcon, color: "text-[#6db33f]" },
-  { name: "PostgreSQL", icon: PostgresIcon, color: "text-[#336791]" },
-  { name: "Redis", icon: RedisIcon, color: "text-[#dc382d]" },
+  { name: "PostgreSQL", icon: PostgresIcon, color: "text-[#4169e1]" },
+  { name: "Redis", icon: RedisIcon, color: "text-[#ff4438]" },
   { name: "MongoDB", icon: MongoIcon, color: "text-[#47a248]" },
   { name: "Docker", icon: DockerIcon, color: "text-[#2496ed]" },
 ];
@@ -29,7 +29,7 @@ const row2 = [
   { name: "TypeScript", icon: TypescriptIcon, color: "text-[#3178c6]" },
   { name: "WebSockets", icon: WebSocketIcon, color: "text-[#38566f]" },
   { name: "WebRTC", icon: WebRTCIcon, color: "text-[#4b58a5]" },
-  { name: "Tailwind CSS", icon: TailwindIcon, color: "text-[#38bdf8]" },
+  { name: "Tailwind CSS", icon: TailwindIcon, color: "text-[#06b6d4]" },
 ];
 
 export default function TechMarquee() {

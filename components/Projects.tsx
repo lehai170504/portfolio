@@ -85,6 +85,13 @@ const BADGE_DOT = {
   emerald: "bg-[#81796c]",
 };
 
+const projectListReveal = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.12 },
+  },
+};
+
 const PROJECTS: Project[] = [
   {
     id: "thriftly",
@@ -181,12 +188,10 @@ function ProjectCard({
   project,
   index,
   className = "",
-  revealOnScroll = true,
 }: {
   project: Project;
   index: number;
   className?: string;
-  revealOnScroll?: boolean;
 }) {
   const prefersReducedMotion = useReducedMotion();
   const a = ACCENT[project.accentColor];
@@ -196,14 +201,26 @@ function ProjectCard({
 
   return (
     <motion.div
-      initial={revealOnScroll
-        ? prefersReducedMotion
-          ? { opacity: 0 }
-          : { opacity: 0, y: 14 }
-        : false}
-      whileInView={revealOnScroll ? { opacity: 1, y: 0, scale: 1 } : undefined}
-      viewport={revealOnScroll ? { once: true, amount: 0.08 } : undefined}
-      transition={{ duration: prefersReducedMotion ? 0.01 : 0.65, ease: [0.22, 1, 0.36, 1] }}
+      variants={{
+        hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 18 },
+        visible: {
+          opacity: 1,
+          y: 0,
+          transition: {
+            duration: prefersReducedMotion ? 0.01 : 0.6,
+            ease: [0.16, 1, 0.3, 1],
+          },
+        },
+      }}
+      whileHover={
+        prefersReducedMotion
+          ? undefined
+          : {
+              y: -6,
+              boxShadow: "0 20px 44px -14px rgba(42, 34, 22, 0.18)",
+              transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] },
+            }
+      }
       className={`relative flex min-w-0 flex-col overflow-hidden border ${a.border} bg-gradient-to-br ${a.from} ${a.via} to-[#fffdf7] p-4 shadow-[0_8px_30px_rgba(42,34,22,0.04)] transition-colors duration-300 sm:p-6 lg:p-8 ${a.hoverBorder} ${className}`}
     >
       <div className="relative flex min-h-0 min-w-0 flex-1 flex-col gap-5 sm:gap-6">
@@ -386,7 +403,13 @@ export default function Projects() {
           </p>
         </div>
 
-        <div className="space-y-6 sm:space-y-8">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.08 }}
+          variants={projectListReveal}
+          className="space-y-6 sm:space-y-8"
+        >
           {PROJECTS.map((project, index) => (
             <ProjectCard
               key={project.id}
@@ -395,7 +418,7 @@ export default function Projects() {
               className="w-full"
             />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

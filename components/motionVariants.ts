@@ -1,16 +1,16 @@
 import type { Variants } from "framer-motion";
 
 export const revealUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 15 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
 export const revealWord: Variants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 15 },
   visible: {
     opacity: 1,
     y: 0,
@@ -19,9 +19,8 @@ export const revealWord: Variants = {
 };
 
 export const staggerReveal: Variants = {
-  hidden: { opacity: 0 },
+  hidden: {},
   visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.04 },
+    transition: { staggerChildren: 0.08, delayChildren: 0.04 },
   },
 };

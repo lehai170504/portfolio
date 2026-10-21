@@ -4,8 +4,50 @@ import { useState, useEffect } from "react";
 import { motion, useReducedMotion, useScroll } from "framer-motion";
 import { Github, Linkedin } from "lucide-react";
 
+const sections = ["projects", "skills", "experience", "contact"] as const;
+
+function SectionLinks({
+  activeSection,
+  layoutId,
+  className,
+}: {
+  activeSection: string | null;
+  layoutId: string;
+  className: string;
+}) {
+  return (
+    <nav aria-label="Main navigation" className={className}>
+      {sections.map((section) => {
+        const label = section[0].toUpperCase() + section.slice(1);
+        const isActive = activeSection === section;
+
+        return (
+          <a
+            key={section}
+            href={`#${section}`}
+            aria-current={isActive ? "location" : undefined}
+            className={`relative inline-flex items-center py-1 transition-colors hover:text-[#f06432] ${
+              isActive ? "text-[#f06432]" : ""
+            }`}
+          >
+            {label}
+            {isActive && (
+              <motion.span
+                layoutId={layoutId}
+                className="absolute inset-x-0 bottom-0 h-0.5 bg-[#f06432]"
+                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              />
+            )}
+          </a>
+        );
+      })}
+    </nav>
+  );
+}
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
   const { scrollYProgress } = useScroll();
   const prefersReducedMotion = useReducedMotion();
 
@@ -15,6 +57,28 @@ export default function Navbar() {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const targets = sections
+      .map((section) => document.getElementById(section))
+      .filter((target): target is HTMLElement => target !== null);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleSections = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+        if (visibleSections[0]) {
+          setActiveSection(visibleSections[0].target.id);
+        }
+      },
+      { rootMargin: "-30% 0px -60% 0px", threshold: 0 },
+    );
+
+    targets.forEach((target) => observer.observe(target));
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -50,30 +114,17 @@ export default function Navbar() {
             </div>
           </a>
 
-          <nav className="order-2 hidden items-center gap-6 text-sm font-medium text-[#716d65] md:flex">
-            <a href="#projects" className="hover:text-[#f06432] transition-colors">
-              Projects
-            </a>
-            <a href="#skills" className="hover:text-[#f06432] transition-colors">
-              Skills
-            </a>
-            <a href="#experience" className="hover:text-[#f06432] transition-colors">
-              Experience
-            </a>
-            <a href="#contact" className="hover:text-[#f06432] transition-colors">
-              Contact
-            </a>
-          </nav>
+          <SectionLinks
+            activeSection={activeSection}
+            layoutId="desktop-active-section"
+            className="order-2 hidden items-center gap-6 text-sm font-medium text-[#716d65] md:flex"
+          />
 
-          <nav
-            aria-label="Main navigation"
+          <SectionLinks
+            activeSection={activeSection}
+            layoutId="mobile-active-section"
             className="order-4 flex w-full items-center justify-between gap-2 border-t border-[#d7d1c5] pt-2 text-[10px] font-medium text-[#716d65] md:hidden"
-          >
-            <a href="#projects" className="transition-colors hover:text-[#f06432]">Projects</a>
-            <a href="#skills" className="transition-colors hover:text-[#f06432]">Skills</a>
-            <a href="#experience" className="transition-colors hover:text-[#f06432]">Experience</a>
-            <a href="#contact" className="transition-colors hover:text-[#f06432]">Contact</a>
-          </nav>
+          />
 
           <div className="order-3 flex items-center gap-2 sm:gap-3">
             <div className="hidden sm:inline-flex items-center gap-2 border border-[#d7d1c5] px-3 py-1 text-xs text-[#716d65] font-medium">
