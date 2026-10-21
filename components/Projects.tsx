@@ -4,10 +4,7 @@ import Image from "next/image";
 import {
   motion,
   useReducedMotion,
-  useScroll,
-  useMotionValueEvent,
 } from "framer-motion";
-import { useRef, useState } from "react";
 import {
   Github,
   Gavel,
@@ -188,12 +185,12 @@ function ProjectCard({
       initial={revealOnScroll
         ? prefersReducedMotion
           ? { opacity: 0 }
-          : { opacity: 0, y: 36, scale: 0.99 }
+          : { opacity: 0, y: 20 }
         : false}
       whileInView={revealOnScroll ? { opacity: 1, y: 0, scale: 1 } : undefined}
-      viewport={revealOnScroll ? { once: true, amount: 0.16, margin: "-40px" } : undefined}
-      transition={{ duration: prefersReducedMotion ? 0.35 : 0.75, delay: prefersReducedMotion ? 0 : index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-      className={`relative flex min-w-0 flex-col overflow-hidden border ${a.border} bg-gradient-to-br ${a.from} ${a.via} to-[#fffdf7] p-4 shadow-[0_8px_30px_rgba(42,34,22,0.04)] transition-all duration-300 hover:-translate-y-1 sm:p-6 lg:p-7 ${a.hoverBorder} ${className}`}
+      viewport={revealOnScroll ? { once: true, amount: 0.12 } : undefined}
+      transition={{ duration: prefersReducedMotion ? 0.01 : 0.8, ease: [0.22, 1, 0.36, 1] }}
+      className={`relative flex min-w-0 flex-col overflow-hidden border ${a.border} bg-gradient-to-br ${a.from} ${a.via} to-[#fffdf7] p-4 shadow-[0_8px_30px_rgba(42,34,22,0.04)] transition-colors duration-300 sm:p-6 lg:p-8 ${a.hoverBorder} ${className}`}
     >
       <div className="relative flex min-h-0 min-w-0 flex-1 flex-col gap-5 sm:gap-6">
         <div className="flex min-w-0 flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -202,17 +199,7 @@ function ProjectCard({
             <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${a.iconBg} border ${a.iconBorder} ${a.iconText} shadow-md ${a.iconShadow} sm:h-12 sm:w-12`}>
               <Icon className="h-6 w-6" />
             </div>
-            <motion.div
-              initial={revealOnScroll
-                ? prefersReducedMotion
-                  ? { opacity: 0 }
-                  : { opacity: 0, y: 22 }
-                : false}
-              whileInView={revealOnScroll ? { opacity: 1, y: 0 } : undefined}
-              viewport={revealOnScroll ? { once: true, amount: 0.2 } : undefined}
-              transition={{ duration: prefersReducedMotion ? 0.35 : 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="min-w-0"
-            >
+            <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-2">
                 <h3 className="font-display text-xl font-bold text-[#1b1b18] sm:text-2xl lg:text-3xl">
                   {project.name}
@@ -225,7 +212,7 @@ function ProjectCard({
                 )}
               </div>
               <p className="text-xs font-medium leading-relaxed text-[#716d65] sm:text-sm">{project.subtitle}</p>
-            </motion.div>
+            </div>
           </div>
 
           <div className="flex flex-wrap items-center gap-2 sm:justify-end">
@@ -264,15 +251,7 @@ function ProjectCard({
           : "flex min-w-0 flex-col gap-5 sm:gap-6"
         }>
           {project.image && (
-            <motion.figure
-              initial={revealOnScroll
-                ? prefersReducedMotion
-                  ? { opacity: 0 }
-                  : { opacity: 0, scale: 0.94, y: 18 }
-                : false}
-              whileInView={revealOnScroll ? { opacity: 1, scale: 1, y: 0 } : undefined}
-              viewport={revealOnScroll ? { once: true, amount: 0.18 } : undefined}
-              transition={{ duration: prefersReducedMotion ? 0.35 : 0.7, ease: [0.16, 1, 0.3, 1] }}
+            <figure
               className={`relative order-first aspect-[16/10] w-full overflow-hidden border border-[#e5dfd3] bg-[#f3f0e8] ${
                 isFeatured ? "lg:order-last" : ""
               }`}
@@ -284,23 +263,15 @@ function ProjectCard({
                 sizes="(max-width: 1024px) 100vw, 55vw"
                 className="object-contain"
               />
-            </motion.figure>
+            </figure>
           )}
 
           <div className={`min-w-0 space-y-4 sm:space-y-5 ${isFeatured ? "lg:order-first" : ""}`}>
-            <motion.p
-              initial={revealOnScroll
-                ? prefersReducedMotion
-                  ? { opacity: 0 }
-                  : { opacity: 0, y: 18 }
-                : false}
-              whileInView={revealOnScroll ? { opacity: 1, y: 0 } : undefined}
-              viewport={revealOnScroll ? { once: true, amount: 0.2 } : undefined}
-              transition={{ duration: prefersReducedMotion ? 0.35 : 0.55 }}
+            <p
               className="max-w-3xl text-sm text-[#5f5a52] leading-relaxed font-normal"
             >
               {project.description}
-            </motion.p>
+            </p>
 
             <div className={`border-y border-[#e5dfd3] py-4 sm:py-5 ${
               isArchitectureProject ? "bg-[#ebe7dd] px-3 sm:px-4" : ""
@@ -311,16 +282,8 @@ function ProjectCard({
               </div>
               <div className="flex flex-wrap items-center gap-2">
                 {project.flow.map((step, stepIndex) => (
-                  <motion.div
+                  <div
                     key={step}
-                    initial={revealOnScroll
-                      ? prefersReducedMotion
-                        ? { opacity: 0 }
-                        : { opacity: 0, y: 10 }
-                      : false}
-                    whileInView={revealOnScroll ? { opacity: 1, y: 0 } : undefined}
-                    viewport={revealOnScroll ? { once: true, amount: 0.2 } : undefined}
-                    transition={{ duration: prefersReducedMotion ? 0.35 : 0.5, delay: prefersReducedMotion ? 0 : stepIndex * 0.1, ease: [0.16, 1, 0.3, 1] }}
                     className="flex min-w-0 items-center gap-2"
                   >
                     <span className={`border border-[#e5dfd3] bg-[#f7f4ed] px-2.5 py-2 font-mono text-[11px] leading-snug text-[#39362f] sm:px-3 sm:text-xs ${
@@ -331,216 +294,63 @@ function ProjectCard({
                     {stepIndex < project.flow.length - 1 && (
                       <ArrowRight className="h-3.5 w-3.5 shrink-0 text-[#aaa397]" aria-hidden="true" />
                     )}
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </div>
 
             <div className="flex flex-wrap gap-2 pt-1">
-              {project.tags.map((tag, tagIndex) => (
-                <motion.span
+              {project.tags.map((tag) => (
+                <span
                   key={tag}
-                  initial={revealOnScroll
-                    ? prefersReducedMotion
-                      ? { opacity: 0 }
-                      : { opacity: 0, y: 8 }
-                    : false}
-                  whileInView={revealOnScroll ? { opacity: 1, y: 0 } : undefined}
-                  viewport={revealOnScroll ? { once: true } : undefined}
-                  transition={{ duration: prefersReducedMotion ? 0.35 : 0.45, delay: prefersReducedMotion ? 0 : tagIndex * 0.06, ease: [0.16, 1, 0.3, 1] }}
                   className={`rounded-lg border border-[#e5dfd3] ${a.tagBg} px-3 py-1 text-xs font-mono text-[#625d54]`}
                 >
                   {tag}
-                </motion.span>
+                </span>
               ))}
             </div>
-            {isFeatured && (
-              <motion.div
-                initial={revealOnScroll
-                  ? prefersReducedMotion
-                    ? { opacity: 0 }
-                    : { opacity: 0, y: 20 }
-                  : false}
-                whileInView={revealOnScroll ? { opacity: 1, y: 0 } : undefined}
-                viewport={revealOnScroll ? { once: true, amount: 0.15 } : undefined}
-                transition={{ duration: prefersReducedMotion ? 0.35 : 0.6 }}
-              >
-                <BackendArchitecture />
-              </motion.div>
-            )}
           </div>
         </div>
+        {isFeatured && (
+          <div className="border-t border-[#d7d1c5] pt-5">
+            <BackendArchitecture />
+          </div>
+        )}
       </div>
-    </motion.div>
-  );
-}
-
-function ProjectSlide({
-  project,
-  index,
-  active,
-  reducedMotion,
-  direction,
-}: {
-  project: Project;
-  index: number;
-  active: boolean;
-  reducedMotion: boolean;
-  direction: number;
-}) {
-  return (
-    <motion.div
-      aria-hidden={!active}
-      initial={false}
-      animate={{
-        opacity: active ? 1 : 0,
-        x: active ? 0 : direction > 0 ? -36 : 36,
-        scale: active ? 1 : 0.99,
-      }}
-      transition={{
-        duration: reducedMotion ? 0.01 : 0.7,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-      className={`absolute inset-0 ${active ? "z-10" : "pointer-events-none"}`}
-    >
-      <ProjectCard
-        project={project}
-        index={index}
-        className="h-full w-full"
-        revealOnScroll={false}
-      />
     </motion.div>
   );
 }
 
 export default function Projects() {
   const prefersReducedMotion = useReducedMotion();
-  const sectionRef = useRef<HTMLElement>(null);
-  const previousProgress = useRef(0);
-  const [progressValue, setProgressValue] = useState(0);
-  const [activeProjectIndex, setActiveProjectIndex] = useState(0);
-  const [slideDirection, setSlideDirection] = useState(1);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end end"],
-  });
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    setProgressValue(Math.round(latest * 100));
-    const nextIndex = Math.min(
-      PROJECTS.length - 1,
-      Math.floor(latest * PROJECTS.length),
-    );
-    if (nextIndex !== activeProjectIndex) {
-      setSlideDirection(latest > previousProgress.current ? 1 : -1);
-      setActiveProjectIndex(nextIndex);
-    }
-    previousProgress.current = latest;
-  });
 
   return (
-    <section
-      id="projects"
-      ref={sectionRef}
-      className="projects-slide-section relative scroll-mt-24 h-auto py-16 sm:py-20 lg:h-[400vh] lg:py-0"
-    >
-      <div
-        className="projects-slide-stage sticky top-0 hidden h-screen flex-col justify-center overflow-hidden pb-6 pt-20 lg:flex"
-      >
-          <div className="container mx-auto w-full max-w-6xl px-6">
-            <div className="mb-5 flex items-end justify-between gap-6 border-b border-[#d7d1c5] pb-5">
-              <div>
-                <div className="mb-2 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[#f06432]">
-                  <Layers className="h-3.5 w-3.5" />
-                  <span>Selected work / 2025—26</span>
-                </div>
-                <h2 className="font-display text-4xl font-bold tracking-[-0.06em] text-[#1b1b18] xl:text-5xl">
-                  Things I&apos;ve built<span className="text-[#f06432]">.</span>
-                </h2>
-              </div>
-              <p className="max-w-xs text-right text-sm leading-relaxed text-[#716d65]">
-                Scroll down to step through each project.
-              </p>
-            </div>
-          </div>
-
-          <div className="container mx-auto w-full max-w-6xl px-6">
-            <div className="relative h-[min(64vh,620px)] min-h-[360px]">
-              {PROJECTS.map((project, index) => (
-                <ProjectSlide
-                  key={project.id}
-                  project={project}
-                  index={index}
-                  active={activeProjectIndex === index}
-                  reducedMotion={Boolean(prefersReducedMotion)}
-                  direction={slideDirection}
-                />
-              ))}
-            </div>
-          </div>
-
-          <div className="container mx-auto mt-5 flex w-full max-w-6xl items-center gap-4 px-6">
-            <div
-              className="h-px flex-1 overflow-hidden bg-[#d7d1c5]"
-              role="progressbar"
-              aria-label="Project gallery progress"
-              aria-valuemin={0}
-              aria-valuemax={100}
-              aria-valuenow={progressValue}
-            >
-              <motion.div
-                className="h-full origin-left bg-[#f06432]"
-                style={{ scaleX: scrollYProgress }}
-              />
-            </div>
-            <span className="shrink-0 font-mono text-[10px] text-[#716d65]">
-              0{activeProjectIndex + 1} — 0{PROJECTS.length}
-            </span>
-          </div>
-      </div>
-
-      <div className="projects-responsive-content block py-16 sm:py-20 lg:hidden">
-        <div className="container mx-auto max-w-6xl px-4 sm:px-6">
-          <div className="mb-8 flex flex-col gap-4 border-b border-[#d7d1c5] pb-6 sm:mb-10 sm:pb-7 sm:flex-row sm:items-end sm:justify-between">
-            <motion.div
-              initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: prefersReducedMotion ? 0.35 : 0.65, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <div className="mb-3 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[#f06432]">
-                <Layers className="h-3.5 w-3.5" />
-                <span>Selected work / 2025—26</span>
-              </div>
-              <h2 className="font-display text-3xl font-bold tracking-[-0.06em] text-[#1b1b18] sm:text-5xl lg:text-6xl">
-                Things I&apos;ve built<span className="text-[#f06432]">.</span>
-              </h2>
-            </motion.div>
-            <motion.p
-              initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: prefersReducedMotion ? 0.35 : 0.55, delay: prefersReducedMotion ? 0 : 0.12 }}
-              className="max-w-xs text-sm leading-relaxed text-[#716d65] sm:text-right"
-            >
-              A few real systems, and the decisions behind them.
-            </motion.p>
-          </div>
-
+    <section id="projects" className="scroll-mt-24 py-16 sm:py-20">
+      <div className="container mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="mb-8 flex flex-col gap-4 border-b border-[#d7d1c5] pb-6 sm:mb-10 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="mb-3 px-1 font-mono text-[10px] uppercase tracking-[0.16em] text-[#8a8378]">
-              Swipe to explore / 01 — 0{PROJECTS.length}
-            </p>
-            <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain px-4 pb-6 sm:-mx-6 sm:gap-5 sm:px-6">
-              {PROJECTS.map((project, index) => (
-                <ProjectCard
-                  key={project.id}
-                  project={project}
-                  index={index}
-                  className="w-[88vw] max-w-[520px] shrink-0 snap-center sm:w-[78vw]"
-                />
-              ))}
+            <div className="mb-3 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[#f06432]">
+              <Layers className="h-3.5 w-3.5" />
+              <span>Selected work / 2025—26</span>
             </div>
+            <h2 className="font-display text-3xl font-bold tracking-[-0.06em] text-[#1b1b18] sm:text-5xl">
+              Things I&apos;ve built<span className="text-[#f06432]">.</span>
+            </h2>
           </div>
+          <p className="max-w-xs text-sm leading-relaxed text-[#716d65] sm:text-right">
+            A few real systems, and the engineering decisions behind them.
+          </p>
+        </div>
+
+        <div className="space-y-6 sm:space-y-8">
+          {PROJECTS.map((project, index) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={index}
+              className="w-full"
+            />
+          ))}
         </div>
       </div>
     </section>
