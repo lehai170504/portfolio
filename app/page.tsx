@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen bg-background text-neutral-100 flex flex-col selection:bg-blue-600 selection:text-white">
+    <main className="relative min-h-screen bg-background text-[#1b1b18] flex flex-col selection:bg-orange-500 selection:text-white">
       <Navbar />
       <Hero />
       <TechMarquee />

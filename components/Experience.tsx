@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Briefcase, Calendar, MapPin, CheckCircle2 } from "lucide-react";
 
 interface TimelineItem {
@@ -19,83 +19,105 @@ const experiences: TimelineItem[] = [
     period: "Feb 2025 – May 2025",
     location: "Vietnam",
     highlights: [
-      "Defined and standardized robust REST API contracts for backend microservices across cross-functional engineering teams.",
-      "Diagnosed and resolved critical frontend and UI/UX defects, significantly elevating product stability and user experience.",
-      "Collaborated actively in an Agile/Scrum team with bi-weekly sprint deliverables and continuous code reviews.",
+      "Standardized REST API contracts across backend microservices.",
+      "Resolved frontend defects and contributed to code reviews.",
+      "Delivered work through bi-weekly Agile sprints.",
     ],
     skills: ["REST APIs", "Java", "Agile/Scrum", "API Design", "UI/UX Optimization"],
   },
 ];
 
 export default function Experience() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
-    <section id="experience" className="py-24 relative border-t border-white/[0.06]">
-      <div className="container mx-auto px-6 max-w-6xl">
-        <div className="mb-14 space-y-3">
-          <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-3.5 py-1 text-xs text-blue-300 font-medium">
-            <span>Career History</span>
-          </div>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-white">
-            Work Experience
-          </h2>
-          <p className="text-neutral-400 max-w-xl text-sm sm:text-base">
-            Professional track record delivering production code and collaborative solutions.
-          </p>
+    <section id="experience" className="relative scroll-mt-24 border-t border-[#d7d1c5] py-14 sm:py-20">
+      <div className="container mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="mb-7 sm:mb-10">
+          <motion.div
+            initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: prefersReducedMotion ? 0.35 : 0.55, ease: [0.16, 1, 0.3, 1] }}
+            className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-[#f06432]"
+          >
+            Experience / 01
+          </motion.div>
+          <motion.h2
+            initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: prefersReducedMotion ? 0.35 : 0.65, delay: prefersReducedMotion ? 0 : 0.08, ease: [0.16, 1, 0.3, 1] }}
+            className="font-display text-4xl font-bold tracking-[-0.05em] text-[#1b1b18] sm:text-5xl"
+          >
+            Where I&apos;ve worked.
+          </motion.h2>
         </div>
 
-        <div className="relative pl-6 sm:pl-8 border-l border-neutral-800 space-y-10">
+        <div className="relative ml-1 border-l border-[#d7d1c5] pl-5 sm:ml-0 sm:pl-8">
           {experiences.map((exp, index) => (
             <motion.div
               key={exp.company}
-              initial={{ opacity: 0, x: -16 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, x: -28, y: 12 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
+              viewport={{ once: true, amount: 0.15, margin: "-30px" }}
+              transition={{ duration: prefersReducedMotion ? 0.35 : 0.7, delay: prefersReducedMotion ? 0 : index * 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="relative"
             >
-              <div className="absolute -left-[31px] sm:-left-[39px] top-2 flex h-4 w-4 items-center justify-center rounded-full border-2 border-[#07080c] bg-blue-500 shadow-md shadow-blue-500/50" />
+              <div className="absolute -left-[27px] top-2 flex h-4 w-4 items-center justify-center rounded-full border-2 border-[#f3f0e8] bg-[#f06432] sm:-left-[39px]" />
 
-              <div className="rounded-3xl border border-neutral-800/90 bg-gradient-to-b from-[#111422]/90 to-[#0c0e16] p-7 sm:p-8 hover:border-neutral-700 transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-black/30">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 border-b border-white/[0.06]">
+              <div className="border border-[#d7d1c5] bg-[#fffdf7] p-4 transition-all hover:border-[#f06432] sm:p-6 lg:p-8">
+                <div className="flex flex-col justify-between gap-3 border-b border-[#e5dfd3] pb-5 sm:flex-row sm:items-center">
                   <div>
-                    <h3 className="font-display text-xl sm:text-2xl font-bold text-white flex items-center gap-2.5">
-                      <Briefcase className="h-5 w-5 text-blue-400" />
+                    <h3 className="font-display flex items-center gap-2.5 text-xl font-bold text-[#1b1b18] sm:text-2xl">
+                      <Briefcase className="h-5 w-5 text-[#f06432]" />
                       {exp.role}
                     </h3>
-                    <p className="text-sm font-semibold text-neutral-300 mt-1">
+                    <p className="mt-1 text-sm font-semibold text-[#716d65]">
                       {exp.company}
                     </p>
                   </div>
 
-                  <div className="flex flex-wrap items-center gap-3 text-xs text-neutral-400">
-                    <span className="inline-flex items-center gap-1.5 rounded-lg bg-[#141724] px-3 py-1.5 border border-neutral-800">
-                      <Calendar className="h-3.5 w-3.5 text-neutral-400" />
+                  <div className="flex flex-wrap items-center gap-3 text-xs text-[#716d65]">
+                    <span className="inline-flex items-center gap-1.5 border border-[#e5dfd3] bg-[#f7f4ed] px-3 py-1.5">
+                      <Calendar className="h-3.5 w-3.5 text-[#f06432]" />
                       {exp.period}
                     </span>
-                    <span className="inline-flex items-center gap-1.5 rounded-lg bg-[#141724] px-3 py-1.5 border border-neutral-800">
-                      <MapPin className="h-3.5 w-3.5 text-neutral-400" />
+                    <span className="inline-flex items-center gap-1.5 border border-[#e5dfd3] bg-[#f7f4ed] px-3 py-1.5">
+                      <MapPin className="h-3.5 w-3.5 text-[#f06432]" />
                       {exp.location}
                     </span>
                   </div>
                 </div>
 
-                <div className="mt-5 space-y-3">
+                <div className="mt-5 grid gap-3 sm:grid-cols-3">
                   {exp.highlights.map((item, i) => (
-                    <div key={i} className="flex items-start gap-2.5 text-sm sm:text-base text-neutral-300">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 mt-1" />
+                    <motion.div
+                      key={i}
+                      initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 18 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: prefersReducedMotion ? 0.35 : 0.5, delay: prefersReducedMotion ? 0 : i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+                      className="flex items-start gap-2.5 text-sm text-[#4d4942]"
+                    >
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#f06432]" />
                       <span className="leading-relaxed">{item}</span>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
 
-                <div className="mt-6 flex flex-wrap gap-2 pt-5 border-t border-white/[0.06]">
-                  {exp.skills.map((skill) => (
-                    <span
+                <div className="mt-6 flex flex-wrap gap-2 border-t border-[#e5dfd3] pt-5">
+                  {exp.skills.map((skill, index) => (
+                    <motion.span
                       key={skill}
-                      className="rounded-lg border border-neutral-800 bg-[#141724] px-3 py-1 text-xs font-mono text-neutral-300"
+                      initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: prefersReducedMotion ? 0.35 : 0.4, delay: prefersReducedMotion ? 0 : index * 0.05 }}
+                      className="border border-[#e5dfd3] bg-[#f7f4ed] px-3 py-1 text-xs font-mono text-[#625d54]"
                     >
                       {skill}
-                    </span>
+                    </motion.span>
                   ))}
                 </div>
               </div>

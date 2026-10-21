@@ -1,85 +1,175 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import Image from "next/image";
 import { ArrowUpRight, Mail, MapPin, Briefcase } from "lucide-react";
 import MagneticButton from "./MagneticButton";
-import HeroAvatar2D from "./HeroAvatar2D";
+import TerminalBoot from "./TerminalBoot";
+import { revealUp, revealWord, staggerReveal } from "./motionVariants";
 
 export default function Hero() {
+  const prefersReducedMotion = useReducedMotion();
+  const initial = "hidden";
+  const sequence = staggerReveal;
+  const entrance = prefersReducedMotion
+    ? { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.35 } } }
+    : revealUp;
+  const wordEntrance = prefersReducedMotion
+    ? { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.35 } } }
+    : revealWord;
+
   return (
-    <section className="relative min-h-[90vh] pt-36 pb-20 flex items-center justify-center overflow-hidden">
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[480px] pointer-events-none bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-600/15 via-purple-600/8 to-transparent blur-3xl ambient-glow" />
+    <section className="relative flex min-h-[92vh] flex-col items-center justify-center overflow-hidden pb-10 pt-24 sm:pb-14 sm:pt-28">
+      <div className="pointer-events-none absolute right-[8%] top-24 h-4 w-4 rotate-45 bg-[#f06432]" />
 
-      <div className="container mx-auto px-6 max-w-7xl relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      <div className="container mx-auto px-6 max-w-7xl relative z-10 w-full">
+        <div className="grid min-w-0 grid-cols-1 items-center gap-2 lg:grid-cols-12 lg:gap-0">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-7 flex flex-col space-y-7 pr-0 lg:pr-6"
+            initial={prefersReducedMotion ? { opacity: 0 } : initial}
+            animate="visible"
+            variants={sequence}
+            className="lg:col-span-7 flex flex-col space-y-6"
           >
-            <div className="inline-flex items-center gap-2 self-start rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-1.5 text-xs text-blue-300">
-              <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="font-medium">Software Engineering Student & Full-Stack Developer</span>
-            </div>
+            <motion.div
+              variants={entrance}
+              className="inline-flex items-center gap-2 self-start font-mono text-[11px] uppercase tracking-[0.2em] text-[#f06432]"
+            >
+              <span className="h-px w-8 bg-[#f06432]" />
+              <span>Software Engineer · Vietnam</span>
+            </motion.div>
 
-            <div className="space-y-3">
-              <h1 className="font-display text-5xl sm:text-7xl font-extrabold tracking-tight text-white leading-[1.08]">
-                Hi, I&apos;m{" "}
-                <span className="bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-300 bg-clip-text text-transparent">
-                  Lê Hoàng Hải
+            <motion.div variants={sequence} className="space-y-4">
+              <motion.h1
+                aria-label="Systems that stay in sync."
+                variants={sequence}
+                className="font-display text-[clamp(2.75rem,12vw,4rem)] font-bold leading-[0.98] tracking-[-0.07em] text-[#1b1b18] sm:text-7xl xl:text-[6.5rem]"
+              >
+                <span className="block" aria-hidden="true">
+                  <motion.span variants={wordEntrance} className="inline-block">
+                    Systems
+                  </motion.span>{" "}
+                  <motion.span variants={wordEntrance} className="inline-block">
+                    that
+                  </motion.span>
                 </span>
-              </h1>
-              <p className="font-display text-xl sm:text-2xl font-semibold text-neutral-300 tracking-tight">
-                Full-Stack / Java Backend Engineer
-              </p>
-            </div>
+                <span className="block" aria-hidden="true">
+                  <motion.span variants={wordEntrance} className="inline-block">
+                    stay
+                  </motion.span>{" "}
+                  <motion.span variants={wordEntrance} className="inline-block text-[#f06432]">
+                    in
+                  </motion.span>{" "}
+                  <motion.span variants={wordEntrance} className="inline-block text-[#f06432]">
+                    sync.
+                  </motion.span>
+                </span>
+              </motion.h1>
+              <motion.p
+                variants={entrance}
+                className="font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-[#716d65] sm:text-xs sm:tracking-[0.18em]"
+              >
+                Java backend <span className="text-[#f06432]">/</span> real-time products
+              </motion.p>
+            </motion.div>
 
-            <p className="text-base sm:text-lg text-neutral-300/90 leading-relaxed max-w-xl font-normal">
-              Software Engineering student with end-to-end product development expertise.
-              Proficient in Java Spring Boot, Next.js, PostgreSQL, and Redis. Building scalable
-              architectures and hardware-accelerated frontend experiences.
-            </p>
+            <motion.p
+              variants={entrance}
+              className="max-w-md text-sm leading-relaxed text-[#5f5a52] sm:text-base"
+            >
+              I build reliable backends for products where every update matters.
+            </motion.p>
 
-            <div className="flex flex-wrap items-center gap-3 pt-1 text-xs text-neutral-400">
-              <div className="flex items-center gap-2 rounded-xl border border-neutral-800 bg-[#0f121a]/80 px-4 py-2.5">
-                <MapPin className="h-3.5 w-3.5 text-blue-400" />
-                <span className="text-neutral-300">Vietnam</span>
-              </div>
-              <div className="flex items-center gap-2 rounded-xl border border-neutral-800 bg-[#0f121a]/80 px-4 py-2.5">
-                <Briefcase className="h-3.5 w-3.5 text-emerald-400" />
-                <span className="text-neutral-300">Ex-Intern at FPT Software</span>
-              </div>
-            </div>
+            <motion.div
+              variants={sequence}
+              className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[#716d65]"
+            >
+              <motion.span variants={entrance} className="inline-flex items-center gap-2">
+                <MapPin className="h-3.5 w-3.5 text-[#f06432]" />
+                Vietnam
+              </motion.span>
+              <motion.span variants={entrance} className="inline-flex items-center gap-2">
+                <Briefcase className="h-3.5 w-3.5 text-[#716d65]" />
+                Former intern · FPT Software
+              </motion.span>
+            </motion.div>
 
-            <div className="pt-2 flex flex-wrap items-center gap-4">
-              <MagneticButton href="#projects">
-                <div className="group inline-flex items-center gap-2 rounded-xl bg-white px-7 py-3.5 text-sm font-bold text-neutral-950 transition-all hover:bg-neutral-200 shadow-lg shadow-white/10">
-                  <span>View Projects</span>
-                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </div>
-              </MagneticButton>
+            <motion.div
+              variants={sequence}
+              className="flex flex-wrap items-center gap-3 pt-1 sm:gap-4"
+            >
+              <motion.div variants={entrance}>
+                <MagneticButton href="#projects">
+                  <div className="group inline-flex items-center gap-2 bg-[#1b1b18] px-5 py-3.5 text-sm font-bold text-[#fffaf2] transition-all hover:bg-[#f06432] sm:px-7">
+                    <span>View Projects</span>
+                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </div>
+                </MagneticButton>
+              </motion.div>
 
-              <MagneticButton href="#contact">
-                <div className="inline-flex items-center gap-2 rounded-xl border border-neutral-700/80 bg-[#11131c] px-6 py-3.5 text-sm font-semibold text-neutral-200 transition-colors hover:border-neutral-600 hover:bg-[#161924] hover:text-white">
-                  <Mail className="h-4 w-4 text-neutral-400" />
-                  <span>Contact Me</span>
-                </div>
-              </MagneticButton>
-            </div>
+              <motion.div variants={entrance}>
+                <MagneticButton href="#contact">
+                  <div className="inline-flex items-center gap-2 border border-[#c9c2b5] bg-transparent px-5 py-3.5 text-sm font-semibold text-[#1b1b18] transition-colors hover:border-[#f06432] hover:text-[#f06432] sm:px-6">
+                    <Mail className="h-4 w-4 text-[#f06432]" />
+                    <span>Contact Me</span>
+                  </div>
+                </MagneticButton>
+              </motion.div>
+            </motion.div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-5 flex justify-center lg:justify-end items-center relative pl-0 lg:pl-4"
+            initial={prefersReducedMotion ? { opacity: 0 } : initial}
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0, scale: 0.92, y: 24 },
+              visible: {
+                opacity: 1,
+                scale: 1,
+                y: 0,
+                transition: { duration: prefersReducedMotion ? 0.35 : 0.9, delay: 0.12, ease: [0.16, 1, 0.3, 1] },
+              },
+            }}
+            className="min-w-0 lg:col-span-5 lg:pl-5"
           >
-            <div className="w-full max-w-[420px]">
-              <HeroAvatar2D />
+            <div className="relative mx-auto aspect-square w-full max-w-[460px] overflow-hidden border border-[#d7d1c5] bg-[radial-gradient(ellipse_at_50%_38%,#fffdf7_0%,#f7f4ed_52%,#ebe7dd_100%)]">
+              <span className="absolute left-4 top-4 z-10 font-mono text-[9px] uppercase tracking-[0.18em] text-[#716d65] sm:left-5 sm:top-5 sm:text-[10px]">
+                01 / Developer
+              </span>
+              <span className="absolute right-4 top-4 z-10 h-3 w-3 rotate-45 bg-[#f06432] sm:right-5 sm:top-5" />
+              <Image
+                src="/profile-portrait.png"
+                alt="Portrait of Lê Hoàng Hải"
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="object-contain object-bottom"
+              />
+              <div className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between border-t border-[#d7d1c5]/80 bg-[#f3f0e8]/85 px-4 py-3 backdrop-blur-[2px] sm:px-5">
+                <span className="font-display text-sm font-bold tracking-tight text-[#1b1b18] sm:text-base">
+                  Lê Hoàng Hải
+                </span>
+                <span className="font-mono text-[8px] uppercase tracking-[0.12em] text-[#716d65] sm:text-[9px] sm:tracking-[0.16em]">
+                  Java / Backend
+                </span>
+              </div>
             </div>
           </motion.div>
         </div>
+
+        <motion.div
+          initial={prefersReducedMotion ? { opacity: 0 } : initial}
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: { duration: prefersReducedMotion ? 0.35 : 0.7, delay: 0.55, ease: [0.16, 1, 0.3, 1] },
+            },
+          }}
+          className="mt-12 max-w-3xl sm:mt-16"
+        >
+          <TerminalBoot />
+        </motion.div>
       </div>
     </section>
   );

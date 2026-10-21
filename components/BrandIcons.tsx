@@ -78,23 +78,24 @@ export function TypescriptIcon({ className = "h-5 w-5" }: IconProps) {
 
 export function WebSocketIcon({ className = "h-5 w-5" }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true" focusable="false">
       <path d="M4 12v-3a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v3" />
       <path d="M20 12v3a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-3" />
-      <path d="M9 12h6" />
-      <circle cx="12" cy="12" r="1" />
+      <path d="M7.5 12h9" />
+      <path d="m14.5 10 2 2-2 2" />
+      <path d="m9.5 10-2 2 2 2" />
     </svg>
   );
 }
 
 export function WebRTCIcon({ className = "h-5 w-5" }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true" focusable="false">
       <circle cx="12" cy="12" r="2" />
-      <path d="M16.24 7.76a6 6 0 0 1 0 8.49" />
-      <path d="M7.76 16.24a6 6 0 0 1 0-8.49" />
-      <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-      <path d="M4.93 19.07a10 10 0 0 1 0-14.14" />
+      <path d="M16 8a5.7 5.7 0 0 1 0 8" />
+      <path d="M8 16a5.7 5.7 0 0 1 0-8" />
+      <path d="M19 5a10 10 0 0 1 0 14" />
+      <path d="M5 19A10 10 0 0 1 5 5" />
     </svg>
   );
 }

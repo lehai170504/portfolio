@@ -1,27 +1,39 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 export default function HeroAvatar2D() {
-  return (
-    <div className="flex justify-center items-center py-6">
-      <motion.div
-        animate={{ y: [0, -8, 0] }}
-        transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-        className="relative w-[300px] h-[380px] sm:w-[340px] sm:h-[430px] md:w-[380px] md:h-[480px] cursor-pointer group"
-      >
-        <div className="absolute -inset-2 rounded-3xl bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-600 opacity-40 blur-2xl group-hover:opacity-75 transition duration-500" />
+  const prefersReducedMotion = useReducedMotion();
 
-        <div className="relative w-full h-full rounded-2xl overflow-hidden border border-slate-700/50 bg-slate-900/80 shadow-2xl backdrop-blur-sm">
-          <Image
-            src="/avatar-2d.png"
-            alt="Lê Hoàng Hải Developer"
-            fill
-            className="object-cover group-hover:scale-105 transition duration-500"
-            priority
-          />
-        </div>
+  return (
+    <div className="flex justify-center items-end relative select-none">
+      <motion.div
+        animate={prefersReducedMotion ? { y: 0 } : { y: [0, -8, 0] }}
+        transition={{ repeat: Infinity, duration: 7, ease: "easeInOut" }}
+        className="relative"
+      >
+        <div
+          className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-[260px] h-[40px] rounded-full blur-2xl opacity-45 z-0"
+          style={{ background: "radial-gradient(ellipse, rgba(198,126,82,0.24) 0%, rgba(198,126,82,0.1) 50%, transparent 80%)" }}
+        />
+
+        <div
+          className="absolute -inset-8 rounded-full blur-3xl opacity-[0.07] z-0 pointer-events-none"
+          style={{ background: "radial-gradient(circle at 50% 60%, #d9a17b 0%, #ead8c4 50%, transparent 70%)" }}
+        />
+
+        <Image
+          src="/avatar-transparent.png"
+          alt="Lê Hoàng Hải — Developer Robot"
+          width={500}
+          height={500}
+          className="relative z-10 w-[300px] sm:w-[360px] md:w-[420px] lg:w-[480px] h-auto"
+          style={{
+            filter: "saturate(0.82) sepia(0.08) drop-shadow(0 10px 24px rgba(68,48,31,0.14))",
+          }}
+          priority
+        />
       </motion.div>
     </div>
   );

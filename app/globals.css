@@ -3,32 +3,35 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 html {
   scroll-behavior: smooth;
-  background-color: #07080c;
-  color: #ededed;
+  background-color: #f3f0e8;
+  color: #1b1b18;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: #07080c;
+  background-color: #f3f0e8;
   overflow-x: hidden;
   background-image:
-    radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.08) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.08) 0px, transparent 50%),
-    radial-gradient(at 50% 50%, rgba(14, 165, 233, 0.04) 0px, transparent 60%),
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 100% 100%, 54px 54px, 54px 54px;
+    linear-gradient(to right, rgba(28, 28, 24, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(28, 28, 24, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 
 ::selection {
-  background-color: #3b82f6;
-  color: #ffffff;
+  background-color: #f06432;
+  color: #fffaf2;
 }
 
 ::-webkit-scrollbar {
@@ -36,16 +39,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #07080c;
+  background: #f3f0e8;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1c202d;
+  background: #aaa69d;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #2b3245;
+  background: #77736c;
 }
 
 @keyframes pulseGlow {
@@ -63,7 +66,7 @@ body {
 }
 
 .ambient-glow {
-  animation: pulseGlow 7s ease-in-out infinite;
+  animation: none;
 }
 
 .card-shine {
@@ -73,5 +76,5 @@ body {
 
 .card-shine:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 36px -12px rgba(59, 130, 246, 0.16);
+  box-shadow: 0 16px 36px -12px rgba(240, 100, 50, 0.16);
 }

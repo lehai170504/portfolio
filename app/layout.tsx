@@ -1,23 +1,23 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Inter, JetBrains_Mono } from "next/font/google";
+import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const displayFont = Plus_Jakarta_Sans({
-  subsets: ["latin", "vietnamese"],
+const displayFont = Space_Grotesk({
+  subsets: ["latin"],
   variable: "--font-display",
-  weight: ["500", "600", "700", "800"],
+  weight: ["500", "600", "700"],
   display: "swap",
 });
 
-const sansFont = Inter({
-  subsets: ["latin", "vietnamese"],
+const sansFont = Space_Grotesk({
+  subsets: ["latin"],
   variable: "--font-sans",
   weight: ["400", "500", "600"],
   display: "swap",
 });
 
 const monoFont = JetBrains_Mono({
-  subsets: ["latin", "vietnamese"],
+  subsets: ["latin"],
   variable: "--font-mono",
   weight: ["400", "500"],
   display: "swap",
