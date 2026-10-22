@@ -1,7 +1,13 @@
 "use client";
 
-import { useRef, useState, ReactNode } from "react";
-import { motion } from "framer-motion";
+import { ReactNode, useEffect, useRef } from "react";
+import {
+  motion,
+  useMotionTemplate,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+} from "framer-motion";
 
 interface MagneticButtonProps {
   children: ReactNode;
@@ -17,28 +23,56 @@ export default function MagneticButton({
   href,
 }: MagneticButtonProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const center = useRef<{ x: number; y: number } | null>(null);
+  const reduceMotion = useReducedMotion();
+  const targetX = useMotionValue(0);
+  const targetY = useMotionValue(0);
+  const springX = useSpring(targetX, {
+    duration: 0.5,
+    bounce: 0.2,
+  });
+  const springY = useSpring(targetY, {
+    duration: 0.5,
+    bounce: 0.2,
+  });
+  const transform = useMotionTemplate`translate3d(${springX}px, ${springY}px, 0)`;
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
-    const { clientX, clientY } = e;
-    const { width, height, left, top } = ref.current.getBoundingClientRect();
-    const x = clientX - (left + width / 2);
-    const y = clientY - (top + height / 2);
-    setPosition({ x: x * 0.35, y: y * 0.35 });
+  useEffect(() => {
+    if (reduceMotion) {
+      center.current = null;
+      targetX.set(0);
+      targetY.set(0);
+    }
+  }, [reduceMotion, targetX, targetY]);
+
+  const handlePointerEnter = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType !== "mouse" || reduceMotion) return;
+    const { width, height, left, top } = e.currentTarget.getBoundingClientRect();
+    center.current = {
+      x: left + width / 2,
+      y: top + height / 2,
+    };
   };
 
-  const handleMouseLeave = () => {
-    setPosition({ x: 0, y: 0 });
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType !== "mouse" || reduceMotion || !center.current) return;
+    targetX.set((e.clientX - center.current.x) * 0.35);
+    targetY.set((e.clientY - center.current.y) * 0.35);
+  };
+
+  const handlePointerLeave = () => {
+    center.current = null;
+    targetX.set(0);
+    targetY.set(0);
   };
 
   const content = (
     <motion.div
       ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      animate={{ x: position.x, y: position.y }}
-      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+      onPointerEnter={handlePointerEnter}
+      onPointerMove={handlePointerMove}
+      onPointerLeave={handlePointerLeave}
+      style={{ transform }}
       className={className}
       onClick={onClick}
     >

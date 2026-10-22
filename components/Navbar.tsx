@@ -95,7 +95,7 @@ export default function Navbar() {
         className="fixed top-0 left-0 right-0 z-40 flex justify-center px-3 pt-3 pointer-events-none sm:px-4 sm:pt-5"
       >
         <div
-          className={`pointer-events-auto flex flex-wrap items-center justify-between border transition-all duration-300 ${scrolled
+          className={`pointer-events-auto flex flex-wrap items-center justify-between border transition-[background-color,border-color,box-shadow] duration-200 ease-[var(--ease-premium)] ${scrolled
               ? "border-[#d7d1c5] bg-[#f3f0e8]/95 shadow-lg shadow-[#342b1d]/[0.08]"
               : "border-transparent bg-[#f3f0e8]/80"
             } w-full max-w-5xl gap-3 px-3 py-2.5 sm:gap-6 sm:px-5 sm:py-3`}
@@ -138,7 +138,7 @@ export default function Navbar() {
               href="https://github.com/lehai170504"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-[#716d65] hover:text-[#f06432] hover:bg-[#e9e5db] transition-all border border-transparent"
+              className="p-2 text-[#716d65] hover:text-[#f06432] hover:bg-[#e9e5db] transition-colors border border-transparent"
               aria-label="GitHub"
             >
               <Github className="h-4 w-4" />
@@ -147,7 +147,7 @@ export default function Navbar() {
               href="https://www.linkedin.com/in/lehai170504"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-[#716d65] hover:text-[#f06432] hover:bg-[#e9e5db] transition-all border border-transparent"
+              className="p-2 text-[#716d65] hover:text-[#f06432] hover:bg-[#e9e5db] transition-colors border border-transparent"
               aria-label="LinkedIn"
             >
               <Linkedin className="h-4 w-4" />

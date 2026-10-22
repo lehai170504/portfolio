@@ -60,7 +60,7 @@ export default function Footer() {
             className="flex flex-col items-start gap-3 pt-2 min-[480px]:flex-row min-[480px]:flex-wrap min-[480px]:items-center"
           >
             <MagneticButton href={`mailto:${email}`}>
-              <div className="inline-flex items-center gap-2 bg-[#f06432] px-6 py-3.5 text-sm font-bold text-white transition-all hover:bg-[#ff8050]">
+              <div className="inline-flex items-center gap-2 bg-[#f06432] px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-[#ff8050]">
                 <Mail className="h-4 w-4" />
                 <span>Send Email</span>
                 <ArrowUpRight className="h-4 w-4" />
@@ -89,7 +89,7 @@ export default function Footer() {
             initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: prefersReducedMotion ? 0.35 : 0.5, delay: prefersReducedMotion ? 0 : 0.3 }}
+            transition={{ duration: prefersReducedMotion ? 0.35 : 0.5, delay: prefersReducedMotion ? 0 : 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-wrap items-center gap-x-4 gap-y-3 pt-4 text-[#c4beb2] sm:gap-6"
           >
             <a
@@ -125,7 +125,7 @@ export default function Footer() {
             initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: prefersReducedMotion ? 0.35 : 0.45, delay: prefersReducedMotion ? 0 : 0.36 }}
+            transition={{ duration: prefersReducedMotion ? 0.35 : 0.45, delay: prefersReducedMotion ? 0 : 0.36, ease: [0.16, 1, 0.3, 1] }}
             className="mt-8 flex w-full flex-col items-center justify-between gap-3 border-t border-[#4b4942] pt-6 font-mono text-[10px] text-[#aaa397] sm:flex-row"
           >
             <p>© {new Date().getFullYear()} Lê Hoàng Hải. All rights reserved.</p>

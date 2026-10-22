@@ -102,7 +102,7 @@ export default function Hero() {
             >
               <motion.div variants={revealUp}>
                 <MagneticButton href="#projects">
-                  <div className="group inline-flex items-center gap-2 bg-[#1b1b18] px-5 py-3.5 text-sm font-bold text-[#fffaf2] transition-all hover:bg-[#f06432] sm:px-7">
+                  <div className="group inline-flex items-center gap-2 bg-[#1b1b18] px-5 py-3.5 text-sm font-bold text-[#fffaf2] transition-colors hover:bg-[#f06432] sm:px-7">
                     <span>View Projects</span>
                     <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </div>

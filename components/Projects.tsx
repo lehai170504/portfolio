@@ -1,6 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
+import { createPortal } from "react-dom";
 import {
   motion,
   useReducedMotion,
@@ -12,7 +14,11 @@ import {
   LineChart,
   ArrowUpRight,
   ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  Images,
   Layers,
+  X,
 } from "lucide-react";
 import CopyMarkdownButton from "./CopyMarkdownButton";
 import BackendArchitecture from "./BackendArchitecture";
@@ -25,10 +31,10 @@ interface Project {
   description: string;
   challenge: string;
   engineeringDecision: string;
-  image?: {
+  images?: {
     src: string;
     alt: string;
-  };
+  }[];
   flow: string[];
   icon: React.ElementType;
   accentColor: "blue" | "purple" | "emerald";
@@ -104,10 +110,10 @@ const PROJECTS: Project[] = [
       "Keep concurrent bids consistent while every participant sees auction updates in real time.",
     engineeringDecision:
       "Use pessimistic locking for bid writes, then broadcast accepted updates through WebSockets; WebRTC supports live streaming.",
-    image: {
-      src: "/thriftly-project.png",
-      alt: "Thriftly vintage clothing auction landing page",
-    },
+    images: [
+      { src: "/thriftly-project.png", alt: "Thriftly vintage clothing auction landing page" },
+      { src: "/thriftly-auctions.png", alt: "Thriftly featured live auction listings" },
+    ],
     flow: ["Bid request", "Row lock", "WebSocket event", "Live auction"],
     icon: Gavel,
     accentColor: "blue",
@@ -136,10 +142,10 @@ High-throughput live bidding and auction platform engineered with pessimistic lo
       "Keep customer workspaces isolated while supporting role-based access and audit work.",
     engineeringDecision:
       "Structure the product around multi-tenant boundaries, RBAC, and assisted audit workflows.",
-    image: {
-      src: "/complipilot-project.png",
-      alt: "CompliPilot compliance workspace landing page",
-    },
+    images: [
+      { src: "/complipilot-project.png", alt: "CompliPilot compliance workspace landing page" },
+      { src: "/complipilot-dashboard.png", alt: "CompliPilot compliance workspace dashboard" },
+    ],
     flow: ["Tenant", "RBAC", "Audit workflow", "AI assistance"],
     icon: ShieldCheck,
     accentColor: "purple",
@@ -194,10 +200,41 @@ function ProjectCard({
   className?: string;
 }) {
   const prefersReducedMotion = useReducedMotion();
+  const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
+  const [previewImageIndex, setPreviewImageIndex] = useState(0);
   const a = ACCENT[project.accentColor];
   const Icon = project.icon;
   const isFeatured = project.id === "thriftly";
   const isArchitectureProject = project.id === "wealthtrack";
+  const images = project.images ?? [];
+  const activeImage = activeImageIndex === null ? null : images[activeImageIndex];
+
+  useEffect(() => {
+    if (activeImageIndex === null) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setActiveImageIndex(null);
+      } else if (event.key === "ArrowRight" && images.length > 1) {
+        setActiveImageIndex((current) =>
+          current === null ? 0 : (current + 1) % images.length,
+        );
+      } else if (event.key === "ArrowLeft" && images.length > 1) {
+        setActiveImageIndex((current) =>
+          current === null ? 0 : (current - 1 + images.length) % images.length,
+        );
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [activeImageIndex, images.length]);
 
   return (
     <motion.div
@@ -212,15 +249,6 @@ function ProjectCard({
           },
         },
       }}
-      whileHover={
-        prefersReducedMotion
-          ? undefined
-          : {
-              y: -6,
-              boxShadow: "0 20px 44px -14px rgba(42, 34, 22, 0.18)",
-              transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] },
-            }
-      }
       className={`relative flex min-w-0 flex-col overflow-hidden border ${a.border} bg-gradient-to-br ${a.from} ${a.via} to-[#fffdf7] p-4 shadow-[0_8px_30px_rgba(42,34,22,0.04)] transition-colors duration-300 sm:p-6 lg:p-8 ${a.hoverBorder} ${className}`}
     >
       <div className="relative flex min-h-0 min-w-0 flex-1 flex-col gap-5 sm:gap-6">
@@ -255,7 +283,7 @@ function ProjectCard({
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 bg-[#1b1b18] px-4 py-2 text-xs font-bold text-[#fffaf2] hover:bg-[#f06432] transition-all"
+                  className="flex items-center gap-1.5 bg-[#1b1b18] px-4 py-2 text-xs font-bold text-[#fffaf2] hover:bg-[#f06432] transition-colors"
                 >
                   <span>{link.label}</span>
                   <ArrowUpRight className="h-4 w-4" />
@@ -266,7 +294,7 @@ function ProjectCard({
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 border border-[#d7d1c5] px-4 py-2 text-xs font-semibold text-[#4d4942] hover:text-[#f06432] hover:border-[#f06432] transition-all"
+                  className="flex items-center gap-1.5 border border-[#d7d1c5] px-4 py-2 text-xs font-semibold text-[#4d4942] hover:text-[#f06432] hover:border-[#f06432] transition-colors"
                 >
                   <Github className="h-4 w-4" />
                   <span>{link.label}</span>
@@ -277,23 +305,156 @@ function ProjectCard({
           </div>
         </div>
 
-        <div className={project.image
+        <div className={images.length > 0
           ? "grid min-w-0 gap-5 sm:gap-7 lg:grid-cols-[0.85fr_1.15fr] lg:items-center"
           : "flex min-w-0 flex-col gap-5 sm:gap-6"
         }>
-          {project.image && (
+          {activeImageIndex !== null && activeImage && createPortal(
+            <motion.div
+              initial={prefersReducedMotion ? false : { opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{
+                duration: prefersReducedMotion ? 0.01 : 0.25,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              role="dialog"
+              aria-modal="true"
+              aria-label={`${project.name} image gallery`}
+              className="fixed inset-0 z-[60] flex items-center justify-center bg-[#171612]/95 p-4 backdrop-blur-sm sm:p-8"
+              onClick={(event) => {
+                if (event.target === event.currentTarget) setActiveImageIndex(null);
+              }}
+            >
+              <button
+                type="button"
+                onClick={() => setActiveImageIndex(null)}
+                aria-label="Close image gallery"
+                className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center border border-white/20 bg-black/30 text-white transition-colors hover:bg-white/15"
+              >
+                <X className="h-5 w-5" />
+              </button>
+
+              <div className="flex h-[min(78vh,900px)] w-full max-w-6xl flex-col items-center gap-4">
+                <div className="relative min-h-0 w-full flex-1">
+                  <Image
+                    key={activeImage.src}
+                    src={activeImage.src}
+                    alt={activeImage.alt}
+                    fill
+                    sizes="100vw"
+                    className="object-contain"
+                    priority
+                  />
+                </div>
+
+                {images.length > 1 && (
+                  <div className="flex w-full items-center justify-center gap-4">
+                    <button
+                      type="button"
+                      onClick={() => setActiveImageIndex((current) =>
+                        current === null ? 0 : (current - 1 + images.length) % images.length
+                      )}
+                      aria-label="Previous image"
+                      className="flex h-10 w-10 items-center justify-center border border-white/20 text-white transition-colors hover:bg-white/15"
+                    >
+                      <ChevronLeft className="h-5 w-5" />
+                    </button>
+                    <div className="flex gap-2">
+                      {images.map((image, index) => (
+                        <button
+                          key={image.src}
+                          type="button"
+                          onClick={() => setActiveImageIndex(index)}
+                          aria-label={`Show image ${index + 1}`}
+                          aria-current={index === activeImageIndex}
+                          className={`relative h-12 w-16 overflow-hidden border ${
+                            index === activeImageIndex ? "border-[#ff916b]" : "border-white/20"
+                          }`}
+                        >
+                          <Image src={image.src} alt="" fill sizes="64px" className="object-cover" />
+                        </button>
+                      ))}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setActiveImageIndex((current) =>
+                        current === null ? 0 : (current + 1) % images.length
+                      )}
+                      aria-label="Next image"
+                      className="flex h-10 w-10 items-center justify-center border border-white/20 text-white transition-colors hover:bg-white/15"
+                    >
+                      <ChevronRight className="h-5 w-5" />
+                    </button>
+                  </div>
+                )}
+
+                <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/65">
+                  {project.name} / {activeImageIndex + 1} of {images.length}
+                </p>
+              </div>
+            </motion.div>,
+            document.body,
+          )}
+
+          {images.length > 0 && (
             <figure
               className={`relative order-first aspect-[16/10] w-full overflow-hidden border border-[#e5dfd3] bg-[#f3f0e8] ${
                 isFeatured ? "lg:order-last" : ""
               }`}
             >
-              <Image
-                src={project.image.src}
-                alt={project.image.alt}
-                fill
-                sizes="(max-width: 1024px) 100vw, 55vw"
-                className="object-contain"
-              />
+              <div
+                className="project-preview absolute inset-0"
+              >
+                {images.map((image, imageIndex) => (
+                  <div
+                    key={image.src}
+                    className={`project-preview-image project-preview-image--${imageIndex} ${
+                      imageIndex === previewImageIndex ? "is-selected" : ""
+                    }`}
+                    aria-hidden="true"
+                  >
+                    <Image
+                      src={image.src}
+                      alt=""
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 55vw"
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  onClick={(event) => {
+                    const hovered = event.currentTarget.parentElement?.matches(":hover");
+                    setActiveImageIndex(hovered && images.length > 1 ? 1 : previewImageIndex);
+                  }}
+                  aria-label={`Open ${project.name} screenshot ${previewImageIndex + 1} of ${images.length}`}
+                  className="absolute inset-0 flex items-end justify-between bg-gradient-to-t from-[#171612]/70 via-transparent to-transparent p-3 text-left text-white transition-colors hover:from-[#171612]/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-[#f06432] sm:p-4"
+                >
+                  <span className="inline-flex items-center gap-2 border border-white/25 bg-black/35 px-3 py-2 font-mono text-[9px] uppercase tracking-[0.12em] backdrop-blur-sm sm:text-[10px]">
+                    <Images className="h-3.5 w-3.5" />
+                    {images.length > 1 ? "Hover to preview · Click to view" : "Click to view"}
+                  </span>
+                  <span className="border border-white/25 bg-black/35 px-2.5 py-2 font-mono text-[9px] backdrop-blur-sm">
+                    {String(images.length).padStart(2, "0")} SCREENS
+                  </span>
+                </button>
+                {images.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      setPreviewImageIndex((current) => (current + 1) % images.length);
+                    }}
+                    aria-label="Show next project screenshot"
+                    className="absolute right-3 top-3 z-10 border border-white/25 bg-black/40 px-2.5 py-1.5 font-mono text-[9px] text-white backdrop-blur-sm transition-colors hover:bg-black/60 sm:right-4 sm:top-4"
+                  >
+                    {String((previewImageIndex + 1) % images.length + 1).padStart(2, "0")} /{" "}
+                    {String(images.length).padStart(2, "0")} →
+                  </button>
+                )}
+              </div>
             </figure>
           )}
 

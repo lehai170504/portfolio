@@ -31,7 +31,7 @@ export default function CopyMarkdownButton({ markdown }: CopyMarkdownButtonProps
     <button
       onClick={handleCopy}
       title="Copy project as Markdown"
-      className="flex items-center gap-1.5 border border-[#d7d1c5] px-3 py-2 text-xs font-semibold text-[#716d65] transition-all hover:border-[#f06432] hover:text-[#f06432]"
+      className="flex items-center gap-1.5 border border-[#d7d1c5] px-3 py-2 text-xs font-semibold text-[#716d65] transition-colors hover:border-[#f06432] hover:text-[#f06432]"
     >
       {copied ? (
         <>

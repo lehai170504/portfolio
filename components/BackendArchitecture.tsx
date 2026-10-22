@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 
 const routes = [
   { d: "M210 105 H292", from: [210, 105], to: [292, 105], duration: 3.2 },
@@ -20,9 +21,12 @@ const nodes = [
 
 export default function BackendArchitecture() {
   const prefersReducedMotion = useReducedMotion();
+  const figureRef = useRef<HTMLElement | null>(null);
+  const isInView = useInView(figureRef, { amount: 0.15 });
+  const shouldAnimate = isInView && !prefersReducedMotion;
 
   return (
-    <figure className="min-w-0 border border-[#d7d1c5] bg-[#ebe7dd] p-3 sm:p-5">
+    <figure ref={figureRef} className="min-w-0 border border-[#d7d1c5] bg-[#ebe7dd] p-3 sm:p-5">
       <figcaption className="mb-2 flex flex-wrap items-center justify-between gap-2 sm:mb-3">
         <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-[#625d54] sm:text-[10px] sm:tracking-[0.2em]">
           Under the hood / real-time bidding
@@ -59,17 +63,21 @@ export default function BackendArchitecture() {
               strokeDasharray="3 10"
               strokeLinecap="round"
               initial={{ strokeDashoffset: 0 }}
-              animate={prefersReducedMotion ? undefined : { strokeDashoffset: -39 }}
-              transition={{ duration, ease: "linear", repeat: Infinity }}
+              animate={{ strokeDashoffset: shouldAnimate ? -39 : 0 }}
+              transition={shouldAnimate
+                ? { duration, ease: "linear", repeat: Infinity }
+                : { duration: 0, repeat: 0 }}
             />
             <motion.circle
               r="4"
               fill="#f06432"
               initial={{ cx: from[0], cy: from[1] }}
-              animate={prefersReducedMotion
-                ? { opacity: 0 }
-                : { cx: [from[0], to[0]], cy: [from[1], to[1]] }}
-              transition={{ duration, ease: "linear", repeat: Infinity }}
+              animate={shouldAnimate
+                ? { cx: [from[0], to[0]], cy: [from[1], to[1]] }
+                : { opacity: 0 }}
+              transition={shouldAnimate
+                ? { duration, ease: "linear", repeat: Infinity }
+                : { duration: 0, repeat: 0 }}
             />
           </g>
         ))}

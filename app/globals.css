@@ -72,7 +72,7 @@ body {
 
 .card-shine {
   position: relative;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 200ms var(--ease-premium), box-shadow 200ms var(--ease-premium);
 }
 
 .card-shine:hover {
@@ -80,7 +80,34 @@ body {
   box-shadow: 0 16px 36px -12px rgba(240, 100, 50, 0.16);
 }
 
-.transition-all,
+.project-preview-image {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.35s var(--ease-premium);
+}
+
+.project-preview-image.is-selected,
+.project-preview-image--0 {
+  opacity: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-preview:hover .project-preview-image--0 {
+    opacity: 0;
+  }
+
+  .project-preview:hover .project-preview-image--1 {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-preview-image {
+    transition: none;
+  }
+}
+
 .transition-colors,
 .transition-transform {
   transition-timing-function: var(--ease-premium);

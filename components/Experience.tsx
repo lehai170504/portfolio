@@ -36,18 +36,18 @@ export default function Experience() {
         <div className="mb-7 sm:mb-10">
           <motion.div
             initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: prefersReducedMotion ? 0.35 : 0.55, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: prefersReducedMotion ? 0.2 : 0.55, delay: prefersReducedMotion ? 0 : 0, ease: [0.16, 1, 0.3, 1] }}
             className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-[#f06432]"
           >
             Experience / 01
           </motion.div>
           <motion.h2
             initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: prefersReducedMotion ? 0.35 : 0.65, delay: prefersReducedMotion ? 0 : 0.08, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: prefersReducedMotion ? 0.2 : 0.65, delay: prefersReducedMotion ? 0 : 0.08, ease: [0.16, 1, 0.3, 1] }}
             className="font-display text-4xl font-bold tracking-[-0.05em] text-[#1b1b18] sm:text-5xl"
           >
             Where I&apos;ve worked.
@@ -59,14 +59,14 @@ export default function Experience() {
             <motion.div
               key={exp.company}
               initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, x: -28, y: 12 }}
-              whileInView={{ opacity: 1, x: 0, y: 0 }}
+              whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true, amount: 0.15, margin: "-30px" }}
-              transition={{ duration: prefersReducedMotion ? 0.35 : 0.7, delay: prefersReducedMotion ? 0 : index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: prefersReducedMotion ? 0.2 : 0.7, delay: prefersReducedMotion ? 0 : index * 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="relative"
             >
               <div className="absolute -left-[27px] top-2 flex h-4 w-4 items-center justify-center rounded-full border-2 border-[#f3f0e8] bg-[#f06432] sm:-left-[39px]" />
 
-              <div className="border border-[#d7d1c5] bg-[#fffdf7] p-4 transition-all hover:border-[#f06432] sm:p-6 lg:p-8">
+              <div className="border border-[#d7d1c5] bg-[#fffdf7] p-4 transition-colors hover:border-[#f06432] sm:p-6 lg:p-8">
                 <div className="flex flex-col justify-between gap-3 border-b border-[#e5dfd3] pb-5 sm:flex-row sm:items-center">
                   <div>
                     <h3 className="font-display flex items-center gap-2.5 text-xl font-bold text-[#1b1b18] sm:text-2xl">
@@ -95,9 +95,9 @@ export default function Experience() {
                     <motion.div
                       key={i}
                       initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 18 }}
-                      whileInView={{ opacity: 1, y: 0 }}
+                      whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
                       viewport={{ once: true, amount: 0.2 }}
-                      transition={{ duration: prefersReducedMotion ? 0.35 : 0.5, delay: prefersReducedMotion ? 0 : i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+                      transition={{ duration: prefersReducedMotion ? 0.2 : 0.5, delay: prefersReducedMotion ? 0 : i * 0.12, ease: [0.16, 1, 0.3, 1] }}
                       className="flex items-start gap-2.5 text-sm text-[#4d4942]"
                     >
                       <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#f06432]" />
@@ -111,9 +111,9 @@ export default function Experience() {
                     <motion.span
                       key={skill}
                       initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
-                      whileInView={{ opacity: 1, y: 0 }}
+                      whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
                       viewport={{ once: true, amount: 0.2 }}
-                      transition={{ duration: prefersReducedMotion ? 0.35 : 0.4, delay: prefersReducedMotion ? 0 : index * 0.05 }}
+                      transition={{ duration: prefersReducedMotion ? 0.2 : 0.4, delay: prefersReducedMotion ? 0 : index * 0.05, ease: [0.16, 1, 0.3, 1] }}
                       className="border border-[#e5dfd3] bg-[#f7f4ed] px-3 py-1 text-xs font-mono text-[#625d54]"
                     >
                       {skill}
